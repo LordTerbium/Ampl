@@ -1,5 +1,6 @@
 package main;
 
+import main.Interface.Launcher.LauncherFrame;
 import main.Interface.Log.Console;
 import main.Interface.Log.LogWrapper;
 import main.Service.Settings.Settings;
@@ -12,7 +13,8 @@ import java.io.IOException;
 public class Ampl {
 
     public static Console logConsole = new Console(new Point(500, 500));
-    public static Settings settings;
+    private static Settings settings;
+    private static LauncherFrame launcherFrame;
 
     public static void main(String[] args) throws IOException {
 
@@ -40,14 +42,18 @@ public class Ampl {
 
         // Gui is painted by the EDT
 
-		/*SwingUtilities.invokeLater(new Runnable() {
+		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-				frame = new LauncherFrame();
+				launcherFrame = new LauncherFrame();
 
 			}
-		});*/
+		});
 
     }
 
+    public static Settings getSettings() {
+
+        return settings;
+    }
 }
