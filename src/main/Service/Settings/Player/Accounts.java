@@ -39,7 +39,7 @@ public class Accounts {
     public User getUserByName(String playerName) {
 
         for (User user : userList) {
-            if (user.getMinecraftCredentials().getSelectedProfile().getName() == playerName) {
+            if (user.getMinecraftCredentials().getSelectedProfile().getName().equals(playerName)) {
                 return user;
             }
         }
@@ -49,20 +49,20 @@ public class Accounts {
     public void save() {
 
         logger.info("Saving user data.");
-        logger.debug("Saving user data to " + Ampl.settings.getDirectories().getUser().getAbsolutePath());
+        logger.debug("Saving user data to " + Ampl.getSettings().getDirectories().getUser().getAbsolutePath());
         JsonUtilities
                 .save(userList,
-                        Ampl.settings.getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat");
+                        Ampl.getSettings().getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat");
     }
 
     public void load() {
 
         logger.info("Loading user credentials.");
-        logger.debug("Loading data from " + Ampl.settings.getDirectories().getUser().getAbsolutePath());
-        if (! new File(Ampl.settings.getDirectories().getUser() + File.separator + "user.dat").exists()) {
+        logger.debug("Loading data from " + Ampl.getSettings().getDirectories().getUser().getAbsolutePath());
+        if (! new File(Ampl.getSettings().getDirectories().getUser() + File.separator + "user.dat").exists()) {
             logger.debug("Loading data for first time. Creating new file.");
             try {
-                new File(Ampl.settings.getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat")
+                new File(Ampl.getSettings().getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat")
                         .createNewFile();
             } catch (IOException e) {
                 logger.fatal("Couldn't create a file: " + e.getMessage());
@@ -71,7 +71,7 @@ public class Accounts {
             save();
         } else {
             JsonUtilities.load(userList,
-                    Ampl.settings.getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat");
+                    Ampl.getSettings().getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat");
             logger.debug("Loaded data.");
         }
     }
