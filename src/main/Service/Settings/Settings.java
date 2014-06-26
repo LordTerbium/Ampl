@@ -63,4 +63,13 @@ public class Settings {
 
         return accounts;
     }
+
+    /**
+     * The method is called before stopping the launcher. All settings get saved.
+     */
+    public void saveAll () {
+
+        accounts.save();
+        infoLauncher.save( infoLauncher );
+    }
 }

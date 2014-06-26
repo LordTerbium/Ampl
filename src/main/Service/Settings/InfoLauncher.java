@@ -151,11 +151,11 @@ public class InfoLauncher {
         this.javaArgs = javaArgs;
     }
 
-    public void save() {
+    public void save ( InfoLauncher data ) {
 
         logger.info("Saving data.");
         logger.debug("Saving launcher config to " + directories.getInstances().getAbsolutePath());
-        JsonUtilities.save(this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf");
+        JsonUtilities.save( data, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
     }
 
     public InfoLauncher load () {
@@ -174,11 +174,12 @@ public class InfoLauncher {
                 logger.fatal("Couldn't create a file: " + e.getMessage());
             }
             logger.debug("Saving data for first time.");
-            save();
+            save( new InfoLauncher( directories ) );
             load();
         } else {
             data = ( InfoLauncher ) JsonUtilities
                     .load( this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
+            data.directories = this.directories;
         }
 
         return data;

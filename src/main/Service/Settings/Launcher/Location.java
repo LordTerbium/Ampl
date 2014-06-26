@@ -13,7 +13,7 @@ import java.awt.*;
 public class Location {
 
     private transient LogWrapper logger = LogWrapper.getLogger(Location.class);
-    private Point offSet = new Point(0, 0);
+    private Point offSet = new Point( 500, 300 );
     private transient Point location = new Point(0, 0);
     private int GDevice = 0;
     private transient GraphicsEnvironment GEnv = GraphicsEnvironment
@@ -80,6 +80,7 @@ public class Location {
      */
     public Point getLocation() {
 
+        setScreen();
         return location;
     }
 
@@ -101,11 +102,8 @@ public class Location {
     public void setScreen() {
 
         if (GDevice > - 1 && GDevice < GDev.length) {
-            location.setLocation(
-                    (GDev[GDevice].getDefaultConfiguration().getBounds().x + (GDev[GDevice]
-                            .getDisplayMode().getWidth()) / 2) - offSet.x,
-                    (GDev[GDevice].getDefaultConfiguration().getBounds().y + GDev[GDevice]
-                            .getDisplayMode().getHeight() / 2) - offSet.y);
+            location.setLocation( ( GDev[ GDevice ].getDefaultConfiguration().getBounds().x ) + offSet.x,
+                    ( GDev[ GDevice ].getDefaultConfiguration().getBounds().y ) + offSet.y );
             logger.debug("Changed starting position of Launcher to<br> x: " + location.x + "<br> y: " + location.y);
         } else if (GDev.length > 0) {
             location.setLocation(
