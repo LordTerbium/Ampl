@@ -14,6 +14,14 @@ public class Authentication {
 
     private LogWrapper logger = LogWrapper.getLogger(Authentication.class);
 
+    /**
+     * The method starts an authentication attempt to the Mojang server. After handling the response it will return true
+     * if it was succesful.
+     *
+     * @param username is a String containing the username, in most cases an email address.
+     * @param password a char array with the password. This won't be stored.
+     * @return true if the login was succesful.
+     */
     public boolean login(String username, char[] password) {
 
         LogIn task = new LogIn(username, password);
@@ -27,6 +35,8 @@ public class Authentication {
             newUser.setAccesToken(task.getResponse().getAccesToken());
             newUser.setId(task.getResponse().getSelectedProfile().getId());
             newUser.setLegacy(task.getResponse().getSelectedProfile().getLegacy());
+
+            getSettings().getAccounts().save();
 
             successful = true;
         } else {

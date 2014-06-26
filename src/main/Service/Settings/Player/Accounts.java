@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * The class contains all Minecraft-Accounts.
@@ -20,7 +19,6 @@ public class Accounts {
     private final String authServer = "https://authserver.mojang.com";
     private LogWrapper logger = LogWrapper.getLogger(Accounts.class);
     private List<User> userList = new ArrayList<User>();
-    private String clienToken = "";
 
     /**
      * The method returns the user list.
@@ -47,21 +45,6 @@ public class Accounts {
             }
         }
         return null;
-    }
-
-    /**
-     * The method returns the clientToken, which is used to identify the client at the Ygdrasil-server of Mojang. If the
-     * string is empty a random hexadecimal code will be generated.
-     *
-     * @return a string containing the clientToken.
-     */
-    public String getClienToken() {
-
-        if (clienToken.isEmpty()) {
-            logger.debug("Token is empty.<br> A new one will be generated.");
-            clienToken = UUID.randomUUID().toString();
-        }
-        return clienToken;
     }
 
     public void save() {

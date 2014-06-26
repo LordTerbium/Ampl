@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 
 /**
  * The class handles the authentication login process to the Yggdrasil server. It contains the login request and
@@ -46,14 +47,14 @@ public class LogIn {
         int code = 404;
         try {
             String content = gson.toJson(this.request);
-            byte[] contentBytes = content.getBytes("UTF - 8");
+            byte[] contentBytes = content.getBytes(Charset.forName("UTF-8"));
 
             URLConnection connection;
 
             connection = authServer.openConnection();
 
             connection.setDoInput(true);
-            connection.setDoOutput(false);
+            connection.setDoOutput(true);
             connection.setRequestProperty("Accept-Charset", "UTF-8");
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Content-Lenght", Integer.toString(contentBytes.length));
@@ -67,12 +68,12 @@ public class LogIn {
 
             if (((HttpURLConnection) connection).getResponseCode() == 200) {
                 responseStream = new BufferedReader(new InputStreamReader(connection.getInputStream(), "UTF-8"));
-                response = gson.fromJson(responseStream.readLine(), response.getClass());
+                response = gson.fromJson(responseStream.readLine(), Response.class);
                 code = ((HttpURLConnection) connection).getResponseCode();
             } else {
                 responseStream = new BufferedReader(
                         new InputStreamReader(((HttpURLConnection) connection).getErrorStream(), "UTF-8"));
-                errorResponse = gson.fromJson(responseStream.readLine(), errorResponse.getClass());
+                errorResponse = gson.fromJson(responseStream.readLine(), ErrorResponse.class);
                 code = ((HttpURLConnection) connection).getResponseCode();
             }
 
@@ -115,7 +116,7 @@ public class LogIn {
         @SuppressWarnings("unused")
         private String password = "";
         @SuppressWarnings("unused")
-        private String clientToken = Ampl.getSettings().getAccounts().getClienToken();
+        private String clientToken = Ampl.getSettings().getInfoLauncher().getClientToken();
 
         Request() {
 
