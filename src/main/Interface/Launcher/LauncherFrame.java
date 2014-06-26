@@ -18,10 +18,8 @@ import static main.Ampl.getSettings;
 public class LauncherFrame extends JFrame implements ComponentListener,
         WindowListener {
 
-    private LogWrapper logger = LogWrapper.getLogger(LauncherFrame.class);
-
-
     private static final long serialVersionUID = - 1443452893964454294L;
+    private LogWrapper logger = LogWrapper.getLogger(LauncherFrame.class);
 
     /**
      * The constructor creates a new frame with settings taken from the configuration.
@@ -35,7 +33,7 @@ public class LauncherFrame extends JFrame implements ComponentListener,
         setMinimumSize(MIN_SIZE);
         setSize(getSettings().getInfoLauncher().getSize());
         setMaximumSize(getSettings().getInfoLauncher().getSize());
-        setResizable(false);
+        setResizable(true);
         BorderLayout LAYOUT = new BorderLayout();
         setLayout(LAYOUT);
 

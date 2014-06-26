@@ -2,8 +2,10 @@ package main.Interface.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class bottomBar extends JPanel {
+public class bottomBar extends JPanel implements ActionListener {
 
     /**
      *
@@ -17,32 +19,39 @@ public class bottomBar extends JPanel {
         BorderLayout LAYOUT = new BorderLayout();
         setLayout(LAYOUT);
 
-        JPanel leftP = new JPanel();
-        leftP.setLayout(new FlowLayout(FlowLayout.RIGHT, 40, 15));
-        leftP.setPreferredSize(new Dimension(120, 40));
-        leftP.setVisible(true);
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 40, 15));
+        btnPanel.setPreferredSize(new Dimension(120, 40));
+        btnPanel.setVisible(true);
 
         JButton btnPlay = new JButton("Play");
         btnPlay.setMinimumSize(new Dimension(50, 15));
         btnPlay.setPreferredSize(new Dimension(80, 30));
         btnPlay.setVisible(true);
-        leftP.add(btnPlay);
+        btnPlay.addActionListener(this);
+        btnPanel.add(btnPlay);
 
-        JPanel centerP = new JPanel();
-        centerP.setLayout(new FlowLayout(FlowLayout.CENTER));
-        centerP.setPreferredSize(new Dimension(80, 40));
-        centerP.setVisible(true);
+        JPanel usrPanel = new JPanel();
+        usrPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        usrPanel.setPreferredSize(new Dimension(80, 40));
+        usrPanel.setVisible(true);
 
-        JTextField txtfUser = new JTextField(15);
-        txtfUser.setMinimumSize(new Dimension(50, 30));
-        txtfUser.setPreferredSize(new Dimension(40, 30));
-        txtfUser.setVisible(true);
-        centerP.add(txtfUser);
+        JComboBox usrCmb = new JComboBox();
+        usrCmb.setMinimumSize(new Dimension(50, 30));
+        usrCmb.setPreferredSize(new Dimension(40, 30));
+        usrCmb.setVisible(true);
+        usrPanel.add(usrCmb);
 
-        add(leftP, BorderLayout.EAST);
-        add(centerP, BorderLayout.CENTER);
+        add(btnPanel, BorderLayout.EAST);
+        add(usrPanel, BorderLayout.WEST);
 
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+
+        new AccountConfiguration();
     }
 
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * The class contains all Minecraft-Accounts.
@@ -16,8 +17,10 @@ import java.util.List;
  */
 public class Accounts {
 
+    private final String authServer = "https://authserver.mojang.com";
     private LogWrapper logger = LogWrapper.getLogger(Accounts.class);
     private List<User> userList = new ArrayList<User>();
+    private String clienToken = "";
 
     /**
      * The method returns the user list.
@@ -39,11 +42,26 @@ public class Accounts {
     public User getUserByName(String playerName) {
 
         for (User user : userList) {
-            if (user.getMinecraftCredentials().getSelectedProfile().getName().equals(playerName)) {
+            if (user.getName().equals(playerName)) {
                 return user;
             }
         }
         return null;
+    }
+
+    /**
+     * The method returns the clientToken, which is used to identify the client at the Ygdrasil-server of Mojang. If the
+     * string is empty a random hexadecimal code will be generated.
+     *
+     * @return a string containing the clientToken.
+     */
+    public String getClienToken() {
+
+        if (clienToken.isEmpty()) {
+            logger.debug("Token is empty.<br> A new one will be generated.");
+            clienToken = UUID.randomUUID().toString();
+        }
+        return clienToken;
     }
 
     public void save() {
@@ -74,5 +92,30 @@ public class Accounts {
                     Ampl.getSettings().getDirectories().getUser().getAbsolutePath() + File.separator + "user.dat");
             logger.debug("Loaded data.");
         }
+    }
+
+    /**
+     * The method creates a new user object with a name and adds it to the userList.
+     *
+     * @param name is the name of the user.
+     * @return the freshly created user object.
+     */
+    public User addUser(String name) {
+
+        User user = new User(name);
+
+        userList.add(user);
+
+        return user;
+    }
+
+    /**
+     * The method returns the proper url to the authentication server of Minecraft.
+     *
+     * @return an url object which contains "https://authserver.mojang.com".
+     */
+    public String getAuthServer() {
+
+        return authServer;
     }
 }

@@ -42,18 +42,23 @@ public class Ampl {
 
         // Gui is painted by the EDT
 
-		SwingUtilities.invokeLater(new Runnable() {
+        SwingUtilities.invokeLater(new Runnable() {
             public void run() {
 
-				launcherFrame = new LauncherFrame();
+                launcherFrame = new LauncherFrame();
 
-			}
-		});
+            }
+        });
 
     }
 
     public static Settings getSettings() {
 
         return settings;
+    }
+
+    public static LauncherFrame getLauncherFrame() {
+
+        return launcherFrame;
     }
 }
