@@ -28,7 +28,7 @@ public class Settings {
 
         logger.debug("Setting up launcher properties.");
         infoLauncher = new InfoLauncher(directories);
-        infoLauncher.load();
+        infoLauncher = infoLauncher.load();
 
         logger.debug("Setting up user data.");
         accounts = new Accounts();

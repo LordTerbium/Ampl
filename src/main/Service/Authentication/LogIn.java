@@ -116,7 +116,7 @@ public class LogIn {
         @SuppressWarnings("unused")
         private String password = "";
         @SuppressWarnings("unused")
-        private String clientToken = Ampl.getSettings().getInfoLauncher().getClientToken();
+        private String clientToken = Ampl.getSettings().getAccounts().getClientToken();
 
         Request() {
 

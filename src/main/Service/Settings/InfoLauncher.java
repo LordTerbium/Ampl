@@ -11,7 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 
 /**
@@ -31,7 +30,7 @@ public class InfoLauncher {
     private int logLevel = 800;
     private int keepLauncherOpen = 0;
     private List<String> javaArgs = new ArrayList<String>();
-    private String clientToken = "";
+    private InfoLauncher data;
 
     protected InfoLauncher(Directories directories) {
 
@@ -152,23 +151,6 @@ public class InfoLauncher {
         this.javaArgs = javaArgs;
     }
 
-    /**
-     * The method returns the clientToken, which is used to identify the client at the Ygdrasil-server of Mojang. If the
-     * string is empty a random hexadecimal code will be generated.
-     *
-     * @return a string containing the clientToken.
-     */
-    public String getClientToken() {
-
-        if (clientToken.isEmpty()) {
-            logger.debug("Token is empty.<br> A new one will be generated.");
-            clientToken = UUID.randomUUID().toString();
-            clientToken.replace("-", "");
-            logger.debug(clientToken);
-        }
-        return clientToken;
-    }
-
     public void save() {
 
         logger.info("Saving data.");
@@ -176,7 +158,7 @@ public class InfoLauncher {
         JsonUtilities.save(this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf");
     }
 
-    public void load() {
+    public InfoLauncher load () {
 
         logger.info("Loading data.");
         logger.debug("Loading launcher config from " + directories.getInstances().getAbsolutePath());
@@ -193,8 +175,12 @@ public class InfoLauncher {
             }
             logger.debug("Saving data for first time.");
             save();
+            load();
         } else {
-            JsonUtilities.load(this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf");
+            data = ( InfoLauncher ) JsonUtilities
+                    .load( this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
         }
+
+        return data;
     }
 }
