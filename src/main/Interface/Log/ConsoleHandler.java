@@ -16,13 +16,14 @@ public class ConsoleHandler extends Handler
     public void publish ( LogRecord record )
     {
 
-        String s = getFormatter().format( record ); try
-    {
-        Console.instance().write( s );
-    } catch ( NullPointerException e )
-    {
-        System.out.println( "There was an error: See the log for further information!!" );
-    }
+        String s = getFormatter().format( record );
+        try
+        {
+            Console.instance().write( s );
+        } catch ( NullPointerException e )
+        {
+            System.out.println( "There was an error: See the log for further information!!" );
+        }
 
 
     }

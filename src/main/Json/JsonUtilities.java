@@ -36,7 +36,8 @@ public class JsonUtilities
 
         logger.debug( "Creating GsonBuilder." );
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create(); logger.debug( "Parsing data..." );
+        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
+        logger.debug( "Parsing data..." );
 
         String content = gson.toJson( jsonModel );
 
@@ -44,7 +45,11 @@ public class JsonUtilities
 
         try
         {
-            FileWriter writer = new FileWriter( filePath ); logger.debug( "Writing to " + filePath ); writer.write( content ); writer.close(); logger.debug( "Saved changes to the file." );
+            FileWriter writer = new FileWriter( filePath );
+            logger.debug( "Writing to " + filePath );
+            writer.write( content );
+            writer.close();
+            logger.debug( "Saved changes to the file." );
         } catch ( IOException e )
         {
             logger.fatal( "You are executing the launcher from a location without write permission.</br> Change this to " +
@@ -56,15 +61,18 @@ public class JsonUtilities
     public static Object load ( Object jsonModel, String filePath )
     {
 
-        logger.debug( "Initialize de-serializer ..." ); Gson gson = new Gson();
+        logger.debug( "Initialize de-serializer ..." );
+        Gson gson = new Gson();
 
         try
         {
 
-            logger.debug( "Reading data from file ..." ); BufferedReader br = new BufferedReader( new FileReader( filePath ) );
+            logger.debug( "Reading data from file ..." );
+            BufferedReader br = new BufferedReader( new FileReader( filePath ) );
 
 
-            logger.debug( "De-serializing data ..." ); jsonModel = gson.fromJson( br, jsonModel.getClass() );
+            logger.debug( "De-serializing data ..." );
+            jsonModel = gson.fromJson( br, jsonModel.getClass() );
 
         } catch ( IOException e )
         {
@@ -76,7 +84,8 @@ public class JsonUtilities
 
             logger.error( "Couldn't read the file. Did you change something?<br>" + e.getMessage() );
 
-        } logger.debug( "Finished de-serializing." );
+        }
+        logger.debug( "Finished de-serializing." );
 
         return jsonModel;
     }

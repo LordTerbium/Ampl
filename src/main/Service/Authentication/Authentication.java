@@ -24,21 +24,28 @@ public class Authentication
     public boolean login ( String username, char[] password )
     {
 
-        LogIn task = new LogIn( username, password ); boolean successful = false; int rCode;
+        LogIn task = new LogIn( username, password );
+        boolean successful = false;
+        int rCode;
 
-        rCode = task.login(); if ( rCode == 200 )
-    {
-        User newUser = Accounts.instance().addUser( task.getResponse().getSelectedProfile().getName() );
+        rCode = task.login();
+        if ( rCode == 200 )
+        {
+            User newUser = Accounts.instance().addUser( task.getResponse().getSelectedProfile().getName() );
 
-        newUser.setAccesToken( task.getResponse().getAccesToken() ); newUser.setId( task.getResponse().getSelectedProfile().getId() ); newUser.setLegacy( task.getResponse().getSelectedProfile().getLegacy() );
+            newUser.setAccesToken( task.getResponse().getAccesToken() );
+            newUser.setId( task.getResponse().getSelectedProfile().getId() );
+            newUser.setLegacy( task.getResponse().getSelectedProfile().getLegacy() );
 
-        Accounts.instance().save();
+            Accounts.instance().save();
 
-        successful = true;
-    } else
-    {
-        logger.fatal( "Login failed. Correct the mistakes and try again." ); logger.debug( "Errorcode: " + task.getErrorResponse().getErrorCode() ); JOptionPane.showMessageDialog( null, task.getErrorResponse().getErrorReport(), "Log-in failed", JOptionPane.ERROR_MESSAGE );
-    }
+            successful = true;
+        } else
+        {
+            logger.fatal( "Login failed. Correct the mistakes and try again." );
+            logger.debug( "Errorcode: " + task.getErrorResponse().getErrorCode() );
+            JOptionPane.showMessageDialog( null, task.getErrorResponse().getErrorReport(), "Log-in failed", JOptionPane.ERROR_MESSAGE );
+        }
 
         return successful;
     }

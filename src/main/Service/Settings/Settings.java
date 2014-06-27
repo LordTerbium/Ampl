@@ -13,7 +13,9 @@ public class Settings
     public static void loadAll ()
     {
 
-        Directories.instance(); InfoLauncher.instance().load(); Accounts.instance().load();
+        Directories.instance();
+        InfoLauncher.instance().load();
+        Accounts.instance().load();
     }
 
 
@@ -23,6 +25,7 @@ public class Settings
     public static void saveAll ()
     {
 
-        Accounts.instance().save(); InfoLauncher.instance().save();
+        Accounts.instance().save();
+        InfoLauncher.instance().save();
     }
 }

@@ -20,12 +20,12 @@ import java.util.List;
 public class AccountConfiguration extends JFrame implements ActionListener, ListSelectionListener
 {
 
-    private final JList<String> usrName;
-    private final JButton       btnDel;
-    private final JTextField    usrNTxt;
+    private final JList<String>  usrName;
+    private final JButton        btnDel;
+    private final JTextField     usrNTxt;
     private final JPasswordField pwTxt;
-    private final JButton       btnAdd;
-    private LogWrapper logger = LogWrapper.getLogger( AccountConfiguration.class );
+    private final JButton        btnAdd;
+    private LogWrapper               logger    = LogWrapper.getLogger( AccountConfiguration.class );
     private DefaultListModel<String> listModel = new DefaultListModel<String>();
 
     public AccountConfiguration ()
@@ -33,41 +33,74 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
 
         logger.debug( "Opening account settings." );
 
-        setLocationRelativeTo( LauncherFrame.instance() ); setTitle( "Accounts-manager" ); Dimension MIN_SIZE = new Dimension( 400, 500 ); setMinimumSize( MIN_SIZE ); setMaximumSize( InfoLauncher.instance().getSize() ); BorderLayout LAYOUT = new BorderLayout(); setLayout( LAYOUT );
+        setLocationRelativeTo( LauncherFrame.instance() );
+        setTitle( "Accounts-manager" );
+        Dimension MIN_SIZE = new Dimension( 400, 500 );
+        setMinimumSize( MIN_SIZE );
+        setMaximumSize( InfoLauncher.instance().getSize() );
+        BorderLayout LAYOUT = new BorderLayout();
+        setLayout( LAYOUT );
 
         logger.debug( "Properties set.<br> Adding panes." );
 
 
         refreshListModel();
 
-        usrName = new JList<String>( listModel ); usrName.setSelectionMode( ListSelectionModel.SINGLE_SELECTION ); usrName.setLayoutOrientation( JList.VERTICAL ); usrName.setVisibleRowCount( - 1 ); JScrollPane scrollPane = new JScrollPane( usrName, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        usrName = new JList<String>( listModel );
+        usrName.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        usrName.setLayoutOrientation( JList.VERTICAL );
+        usrName.setVisibleRowCount( - 1 );
+        JScrollPane scrollPane = new JScrollPane( usrName, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
         scrollPane.setPreferredSize( new Dimension( 250, 80 ) );
 
-        JPanel btnPanel = new JPanel(); btnPanel.setLayout( new BoxLayout( btnPanel, BoxLayout.PAGE_AXIS ) );
+        JPanel btnPanel = new JPanel();
+        btnPanel.setLayout( new BoxLayout( btnPanel, BoxLayout.PAGE_AXIS ) );
 
-        ImageIcon icon = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-add.png" ) ); btnAdd = new JButton( icon ); btnAdd.addActionListener( this );
+        ImageIcon icon = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-add.png" ) );
+        btnAdd = new JButton( icon );
+        btnAdd.addActionListener( this );
 
-        btnAdd.setActionCommand( "add" ); ImageIcon icon1 = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-remove.png" ) ); btnDel = new JButton( icon1 ); btnDel.addActionListener( this ); btnDel.setActionCommand( "del" ); btnDel.setEnabled( false );
+        btnAdd.setActionCommand( "add" );
+        ImageIcon icon1 = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-remove.png" ) );
+        btnDel = new JButton( icon1 );
+        btnDel.addActionListener( this );
+        btnDel.setActionCommand( "del" );
+        btnDel.setEnabled( false );
 
-        btnPanel.add( btnAdd ); btnPanel.add( btnDel );
+        btnPanel.add( btnAdd );
+        btnPanel.add( btnDel );
 
-        JPanel dtPanel = new JPanel(); dtPanel.setLayout( new BoxLayout( dtPanel, BoxLayout.PAGE_AXIS ) ); dtPanel.setBackground( new Color( 117, 117, 117 ) );
+        JPanel dtPanel = new JPanel();
+        dtPanel.setLayout( new BoxLayout( dtPanel, BoxLayout.PAGE_AXIS ) );
+        dtPanel.setBackground( new Color( 117, 117, 117 ) );
 
-        JPanel usrNPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 20, 20 ) ); usrNPanel.setOpaque( false );
+        JPanel usrNPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 20, 20 ) );
+        usrNPanel.setOpaque( false );
 
-        JLabel usrNLbl = new JLabel( "User name:" ); usrNTxt = new JTextField(); usrNTxt.setColumns( 15 );
+        JLabel usrNLbl = new JLabel( "User name:" );
+        usrNTxt = new JTextField();
+        usrNTxt.setColumns( 15 );
 
-        usrNPanel.add( usrNLbl ); usrNPanel.add( usrNTxt );
+        usrNPanel.add( usrNLbl );
+        usrNPanel.add( usrNTxt );
 
-        JPanel pwPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 20, 20 ) ); pwPanel.setOpaque( false );
+        JPanel pwPanel = new JPanel( new FlowLayout( FlowLayout.CENTER, 20, 20 ) );
+        pwPanel.setOpaque( false );
 
-        JLabel pwLbl = new JLabel( "Password:" ); pwTxt = new JPasswordField(); pwTxt.setEchoChar( '*' ); pwTxt.setColumns( 15 );
+        JLabel pwLbl = new JLabel( "Password:" );
+        pwTxt = new JPasswordField();
+        pwTxt.setEchoChar( '*' );
+        pwTxt.setColumns( 15 );
 
-        pwPanel.add( pwLbl ); pwPanel.add( pwTxt );
+        pwPanel.add( pwLbl );
+        pwPanel.add( pwTxt );
 
-        dtPanel.add( usrNPanel ); dtPanel.add( pwPanel );
+        dtPanel.add( usrNPanel );
+        dtPanel.add( pwPanel );
 
-        add( scrollPane, BorderLayout.CENTER ); add( btnPanel, BorderLayout.WEST ); add( dtPanel, BorderLayout.SOUTH );
+        add( scrollPane, BorderLayout.CENTER );
+        add( btnPanel, BorderLayout.WEST );
+        add( dtPanel, BorderLayout.SOUTH );
 
         setVisible( true );
     }
@@ -78,27 +111,33 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
     private void refreshListModel ()
     {
 
-        List<User> userList = Accounts.instance().getUserList(); if ( ! userList.isEmpty() )
-    {
+        List<User> userList = Accounts.instance().getUserList();
+        if ( ! userList.isEmpty() )
+        {
 
-        logger.debug( "Refreshing user data." ); for ( User user : userList )
-    {
-        listModel.addElement( user.getName() );
-    }
-    } else
-    {
-        logger.debug( "Loading data ..." ); Accounts.instance().load(); userList = Accounts.instance().getUserList(); if ( ! userList.isEmpty() )
-    {
+            logger.debug( "Refreshing user data." );
+            for ( User user : userList )
+            {
+                listModel.addElement( user.getName() );
+            }
+        } else
+        {
+            logger.debug( "Loading data ..." );
+            Accounts.instance().load();
+            userList = Accounts.instance().getUserList();
+            if ( ! userList.isEmpty() )
+            {
 
-        logger.debug( "Refreshing user data." ); for ( User user : userList )
-    {
-        listModel.addElement( user.getName() );
-    }
-    } else
-    {
-        logger.debug( "No data ..." );
-    }
-    }
+                logger.debug( "Refreshing user data." );
+                for ( User user : userList )
+                {
+                    listModel.addElement( user.getName() );
+                }
+            } else
+            {
+                logger.debug( "No data ..." );
+            }
+        }
     }
 
     /**
@@ -113,15 +152,20 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
         if ( e.getActionCommand().equals( "add" ) )
         {
             //TODO implement the authentication of the provided data.
-            Authentication authentication = new Authentication(); if ( authentication.login( usrNTxt.getText(), pwTxt.getPassword() ) )
-        {
+            Authentication authentication = new Authentication();
+            if ( authentication.login( usrNTxt.getText(), pwTxt.getPassword() ) )
+            {
 
-            refreshListModel(); usrNTxt.setText( "" ); pwTxt.setText( "" ); btnAdd.setEnabled( false );
-        }
+                refreshListModel();
+                usrNTxt.setText( "" );
+                pwTxt.setText( "" );
+                btnAdd.setEnabled( false );
+            }
         } else if ( e.getActionCommand().equals( "del" ) )
         {
             //TODO implement the logout of the selected list entry.
-            int index = usrName.getSelectedIndex(); usrName.remove( index );
+            int index = usrName.getSelectedIndex();
+            usrName.remove( index );
         }
     }
 
@@ -129,12 +173,13 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
     public void valueChanged ( ListSelectionEvent e )
     {
 
-        ListSelectionModel listSelectionModel = ( ListSelectionModel ) e.getSource(); if ( ! listSelectionModel.isSelectionEmpty() && ! e.getValueIsAdjusting() )
-    {
-        btnDel.setEnabled( true );
-    } else
-    {
-        btnDel.setEnabled( false );
-    }
+        ListSelectionModel listSelectionModel = ( ListSelectionModel ) e.getSource();
+        if ( ! listSelectionModel.isSelectionEmpty() && ! e.getValueIsAdjusting() )
+        {
+            btnDel.setEnabled( true );
+        } else
+        {
+            btnDel.setEnabled( false );
+        }
     }
 }

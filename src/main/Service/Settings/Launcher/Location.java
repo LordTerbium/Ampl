@@ -82,7 +82,8 @@ public class Location
     public Point getLocation ()
     {
 
-        setScreen(); return location;
+        setScreen();
+        return location;
     }
 
     /**
@@ -104,7 +105,8 @@ public class Location
 
         if ( GDevice > - 1 && GDevice < GDev.length )
         {
-            location.setLocation( ( GDev[ GDevice ].getDefaultConfiguration().getBounds().x ) + offSet.x, ( GDev[ GDevice ].getDefaultConfiguration().getBounds().y ) + offSet.y ); logger.debug( "Changed starting position of Launcher to<br> x: " + location.x + "<br> y: " + location.y );
+            location.setLocation( ( GDev[ GDevice ].getDefaultConfiguration().getBounds().x ) + offSet.x, ( GDev[ GDevice ].getDefaultConfiguration().getBounds().y ) + offSet.y );
+            logger.debug( "Changed starting position of Launcher to<br> x: " + location.x + "<br> y: " + location.y );
         } else if ( GDev.length > 0 )
         {
             location.setLocation( GDev[ 0 ].getDefaultConfiguration().getBounds().x + ( GDev[ 0 ].getDisplayMode().getWidth() ) / 2, GDev[ 0 ].getDefaultConfiguration().getBounds().y + ( GDev[ 0 ].getDisplayMode().getHeight() ) / 2 );

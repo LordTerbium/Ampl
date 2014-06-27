@@ -12,7 +12,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.nio.charset.Charset;
 
 /**
@@ -23,54 +22,79 @@ public class LogIn
 
     private LogWrapper logger = LogWrapper.getLogger( LogIn.class );
 
-    private Request  request  = new Request();
-    private Response response = null;
+    private Request       request       = new Request();
+    private Response      response      = null;
     private ErrorResponse errorResponse = null;
     private URL authServer;
 
     protected LogIn ( String username, char[] password )
     {
 
-        request.password = new String( password ); request.username = username; try
-    {
-        authServer = new URL( Accounts.instance().getAuthServer() + "/authenticate" );
-    } catch ( MalformedURLException e )
-    {
-        logger.fatal( "My fault. I have a typo in the basic url. Forward this to the developer. <br>" + e.getLocalizedMessage() );
-    }
+        request.password = new String( password );
+        request.username = username;
+        try
+        {
+            authServer = new URL( Accounts.instance().getAuthServer() + "/authenticate" );
+        } catch ( MalformedURLException e )
+        {
+            logger.fatal( "My fault. I have a typo in the basic url. Forward this to the developer. <br>" + e.getLocalizedMessage() );
+        }
     }
 
     public int login ()
     {
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create(); int code = 404; try
-    {
-        String content = gson.toJson( this.request ); byte[] contentBytes = content.getBytes( Charset.forName( "UTF-8" ) );
-
-        URLConnection connection;
-
-        connection = authServer.openConnection();
-
-        connection.setDoInput( true ); connection.setDoOutput( true ); connection.setRequestProperty( "Accept-Charset", "UTF-8" ); connection.setRequestProperty( "Content-Type", "application/json" ); connection.setRequestProperty( "Content-Lenght", Integer.toString( contentBytes.length ) );
-
-        OutputStream requestStream = connection.getOutputStream();
-
-        requestStream.write( contentBytes, 0, contentBytes.length ); requestStream.close();
-
-        BufferedReader responseStream;
-
-        if ( ( ( HttpURLConnection ) connection ).getResponseCode() == 200 )
+        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
+        int code = 404;
+        try
         {
-            responseStream = new BufferedReader( new InputStreamReader( connection.getInputStream(), "UTF-8" ) ); response = gson.fromJson( responseStream.readLine(), Response.class ); code = ( ( HttpURLConnection ) connection ).getResponseCode();
-        } else
+            String content = gson.toJson( this.request );
+            byte[] contentBytes = content.getBytes( Charset.forName( "UTF-8" ) );
+
+            HttpURLConnection connection;
+
+            connection = ( HttpURLConnection ) authServer.openConnection();
+
+            connection.setConnectTimeout( 15000 );
+            connection.setReadTimeout( 15000 );
+            connection.setUseCaches( false );
+            connection.setDoInput( true );
+            connection.setDoOutput( true );
+            connection.setRequestMethod( "POST" );
+            connection.setRequestProperty( "Accept-Charset", "UTF-8" );
+            connection.setRequestProperty( "Content-Type", "application/json" );
+            connection.setRequestProperty( "Content-Lenght", Integer.toString( contentBytes.length ) );
+
+            OutputStream requestStream = connection.getOutputStream();
+
+            requestStream.write( contentBytes, 0, contentBytes.length );
+            requestStream.flush();
+            requestStream.close();
+
+            BufferedReader responseStream;
+
+            if ( ( ( HttpURLConnection ) connection ).getResponseCode() == 200 )
+            {
+                responseStream = new BufferedReader( new InputStreamReader( connection.getInputStream(), "UTF-8" ) );
+                String data = responseStream.readLine();
+                System.out.println( data );
+                response = gson.fromJson( data, Response.class );
+                code = ( ( HttpURLConnection ) connection ).getResponseCode();
+
+                responseStream.close();
+            } else
+            {
+                responseStream = new BufferedReader( new InputStreamReader( ( ( HttpURLConnection ) connection ).getErrorStream(), "UTF-8" ) );
+                errorResponse = gson.fromJson( responseStream.readLine(), ErrorResponse.class );
+                code = ( ( HttpURLConnection ) connection ).getResponseCode();
+
+                responseStream.close();
+            }
+
+        } catch ( IOException e )
         {
-            responseStream = new BufferedReader( new InputStreamReader( ( ( HttpURLConnection ) connection ).getErrorStream(), "UTF-8" ) ); errorResponse = gson.fromJson( responseStream.readLine(), ErrorResponse.class ); code = ( ( HttpURLConnection ) connection ).getResponseCode();
+            logger.fatal( "Something went wrong. Maybe its your connection status:<br>" + e.getLocalizedMessage() );
         }
-
-    } catch ( IOException e )
-    {
-        logger.fatal( "Something went wrong. Maybe its your connection status:<br>" + e.getLocalizedMessage() );
-    }
 
         return code;
     }
@@ -136,7 +160,7 @@ public class LogIn
     class Response
     {
 
-        private String    accesToken        = "";
+        private String    accessToken       = "";
         private String    clientToken       = "";
         @SuppressWarnings ( "unused" )
         private Profile[] availableProfiles = new Profile[] { new Profile() };
@@ -172,14 +196,14 @@ public class LogIn
         public String getAccesToken ()
         {
 
-            return accesToken;
+            return accessToken;
         }
 
         class Profile
         {
 
-            private String id   = "";
-            private String name = "";
+            private String  id     = "";
+            private String  name   = "";
             private boolean legacy = false;
 
             /**

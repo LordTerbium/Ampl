@@ -20,8 +20,12 @@ public class ErrorResponse
     public ErrorResponse ()
     {
 
-        errorMap.put( Error.METHOD_NOT_ALLOWED, "Something other than a POST request was recieved. What are you trying to do?" ); errorMap.put( Error.NOT_FOUND, "You called a non existing endpoint. What are you working out?" ); errorMap.put( Error.FORBIDDEN_OPERATION_EXCEPTION, "This account doesn't exist. Control your username and password." );
-        errorMap.put( Error.USER_MIGRATED_EXCEPTION, "Invalid username. The account was migrated. Try with your Mojang credentials." ); errorMap.put( Error.ILLEGAL_ARGUMENT_EXCEPTION, "Username or password were not submitted." ); errorMap.put( Error.UNSUPPORTED_MEDIA_TYPE, "Data was not submitted as application/json." );
+        errorMap.put( Error.METHOD_NOT_ALLOWED, "Something other than a POST request was recieved. What are you trying to do?" );
+        errorMap.put( Error.NOT_FOUND, "You called a non existing endpoint. What are you working out?" );
+        errorMap.put( Error.FORBIDDEN_OPERATION_EXCEPTION, "This account doesn't exist. Control your username and password." );
+        errorMap.put( Error.USER_MIGRATED_EXCEPTION, "Invalid username. The account was migrated. Try with your Mojang credentials." );
+        errorMap.put( Error.ILLEGAL_ARGUMENT_EXCEPTION, "Username or password were not submitted." );
+        errorMap.put( Error.UNSUPPORTED_MEDIA_TYPE, "Data was not submitted as application/json." );
     }
 
     /**

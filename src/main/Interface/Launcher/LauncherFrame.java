@@ -27,10 +27,14 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
     private LauncherFrame ()
     {
 
-        logger.debug( "Building frame.<br> Setting stored properties." ); setLocation( InfoLauncher.instance().getLocation().getLocation() ); System.out.println( InfoLauncher.instance().getLocation().getLocation().toString() );
+        logger.debug( "Building frame.<br> Setting stored properties." );
+        setLocation( InfoLauncher.instance().getLocation().getLocation() );
+        System.out.println( InfoLauncher.instance().getLocation().getLocation().toString() );
         setTitle( "AMP Launcher" );
         Dimension MIN_SIZE = new Dimension( 600, 400 );
-        setMinimumSize( MIN_SIZE ); setSize( InfoLauncher.instance().getSize() ); setMaximumSize( InfoLauncher.instance().getSize() );
+        setMinimumSize( MIN_SIZE );
+        setSize( InfoLauncher.instance().getSize() );
+        setMaximumSize( InfoLauncher.instance().getSize() );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         setResizable( true );
         BorderLayout LAYOUT = new BorderLayout();
@@ -43,9 +47,10 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
 
         logger.debug( "Adding listener." );
         addComponentListener( this );
-        addWindowListener( this ); logger.debug( "Showing window on monitor " + InfoLauncher.instance().getLocation().getGDevice() +
-                                                 "<br> at x: " + InfoLauncher.instance().getLocation().getOffSet().getX() + "<br> y: " +
-                                                 InfoLauncher.instance().getLocation().getOffSet().getY() );
+        addWindowListener( this );
+        logger.debug( "Showing window on monitor " + InfoLauncher.instance().getLocation().getGDevice() +
+                      "<br> at x: " + InfoLauncher.instance().getLocation().getOffSet().getX() + "<br> y: " +
+                      InfoLauncher.instance().getLocation().getOffSet().getY() );
         setVisible( true );
 
     }
@@ -77,7 +82,8 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
     private void defineMonitor ()
     {
 
-        GraphicsDevice GDev = InfoLauncher.instance().getLocation().getGDev()[ InfoLauncher.instance().getLocation().getGDevice() ]; System.out.println( InfoLauncher.instance().getLocation().getGDevice() );
+        GraphicsDevice GDev = InfoLauncher.instance().getLocation().getGDev()[ InfoLauncher.instance().getLocation().getGDevice() ];
+        System.out.println( InfoLauncher.instance().getLocation().getGDevice() );
         Dimension screenEnd = new Dimension( GDev.getDisplayMode().getWidth() + GDev.getDefaultConfiguration().getBounds().x, GDev.getDisplayMode().getHeight() + GDev.getDefaultConfiguration().getBounds().y );
 
         Dimension screenStart = new Dimension( GDev.getDefaultConfiguration().getBounds().x, GDev.getDefaultConfiguration().getBounds().y );
@@ -86,14 +92,16 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
              this.getLocationOnScreen().x < screenStart.width ||
              this.getLocationOnScreen().y < screenStart.height )
         {
-            logger.debug( "Entered new monitor." ); for ( int i = 0; i < InfoLauncher.instance().getLocation().getGDev().length; i++ )
-        {
-            if ( this.getLocationOnScreen().x < InfoLauncher.instance().getLocation().getGDev()[ i ].getDisplayMode().getWidth() + InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x &&
-                 this.getLocationOnScreen().y < InfoLauncher.instance().getLocation().getGDev()[ i ].getDisplayMode().getHeight() + InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().y &&
-                 this.getLocationOnScreen().x > InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x &&
-                 this.getLocationOnScreen().x > InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x )
+            logger.debug( "Entered new monitor." );
+            for ( int i = 0; i < InfoLauncher.instance().getLocation().getGDev().length; i++ )
             {
-                InfoLauncher.instance().getLocation().setGDevice( i ); InfoLauncher.instance().getLocation().setScreen();
+                if ( this.getLocationOnScreen().x < InfoLauncher.instance().getLocation().getGDev()[ i ].getDisplayMode().getWidth() + InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x &&
+                     this.getLocationOnScreen().y < InfoLauncher.instance().getLocation().getGDev()[ i ].getDisplayMode().getHeight() + InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().y &&
+                     this.getLocationOnScreen().x > InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x &&
+                     this.getLocationOnScreen().x > InfoLauncher.instance().getLocation().getGDev()[ i ].getDefaultConfiguration().getBounds().x )
+                {
+                    InfoLauncher.instance().getLocation().setGDevice( i );
+                    InfoLauncher.instance().getLocation().setScreen();
                     logger.debug( "Monitor changed: <br> New screen is device" + i );
                 }
             }
@@ -115,7 +123,8 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
 
         /* TODO we have to implement this reaction based on the state of Minecraft. Elsewhere we won't be able to
         close the application. */
-        this.setVisible( false ); Settings.saveAll();
+        this.setVisible( false );
+        Settings.saveAll();
     }
 
     @Override

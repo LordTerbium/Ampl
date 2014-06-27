@@ -49,33 +49,43 @@ public class Accounts
             {
                 return user;
             }
-        } return null;
+        }
+        return null;
     }
 
     public void load ()
     {
 
-        logger.info( "Loading user credentials." ); logger.debug( "Loading data from " + Directories.instance().getUser().getAbsolutePath() );
+        logger.info( "Loading user credentials." );
+        logger.debug( "Loading data from " + Directories.instance().getUser().getAbsolutePath() );
 
         if ( ! new File( Directories.instance().getUser() + File.separator + "user.dat" ).exists() )
         {
-            logger.debug( "Loading data for first time. Creating new file." ); try
-        {
-            new File( Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" ).createNewFile();
-        } catch ( IOException e )
-        {
-            logger.fatal( "Couldn't create a file: " + e.getMessage() );
-            } logger.debug( "File created. Saving data." ); save();
+            logger.debug( "Loading data for first time. Creating new file." );
+            try
+            {
+                new File( Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" ).createNewFile();
+            } catch ( IOException e )
+            {
+                logger.fatal( "Couldn't create a file: " + e.getMessage() );
+            }
+            logger.debug( "File created. Saving data." );
+            save();
         } else
         {
-            Accounts accounts = ( main.Service.Settings.Player.Accounts ) JsonUtilities.load( this, Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" ); this.userList = accounts.userList; this.clientToken = accounts.clientToken; logger.debug( "Loaded data." );
+            Accounts accounts = ( main.Service.Settings.Player.Accounts ) JsonUtilities.load( this, Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" );
+            this.userList = accounts.userList;
+            this.clientToken = accounts.clientToken;
+            logger.debug( "Loaded data." );
         }
     }
 
     public void save ()
     {
 
-        logger.info( "Saving user data." ); logger.debug( "Saving user data to " + Directories.instance().getUser().getAbsolutePath() ); JsonUtilities.save( Accounts.instance(), Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" );
+        logger.info( "Saving user data." );
+        logger.debug( "Saving user data to " + Directories.instance().getUser().getAbsolutePath() );
+        JsonUtilities.save( Accounts.instance(), Directories.instance().getUser().getAbsolutePath() + File.separator + "user.dat" );
     }
 
     public static Accounts instance ()
@@ -121,7 +131,8 @@ public class Accounts
         if ( clientToken.isEmpty() )
         {
             logger.debug( "Token is empty.<br> A new one will be generated." );
-            clientToken = java.util.UUID.randomUUID().toString(); clientToken = clientToken.replaceAll( "-", "" );
+            clientToken = java.util.UUID.randomUUID().toString();
+            clientToken = clientToken.replaceAll( "-", "" );
             logger.debug( clientToken );
         }
         return clientToken;

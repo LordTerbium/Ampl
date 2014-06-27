@@ -168,17 +168,21 @@ public class InfoLauncher
     public void save ()
     {
 
-        logger.info( "Saving data." ); logger.debug( "Saving launcher config to " + directories.getInstances().getAbsolutePath() ); JsonUtilities.save( InfoLauncher.instance(), directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
+        logger.info( "Saving data." );
+        logger.debug( "Saving launcher config to " + directories.getInstances().getAbsolutePath() );
+        JsonUtilities.save( InfoLauncher.instance(), directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
     }
 
     public void load ()
     {
 
-        logger.info( "Loading data." ); logger.debug( "Loading launcher config from " + directories.getInstances().getAbsolutePath() );
+        logger.info( "Loading data." );
+        logger.debug( "Loading launcher config from " + directories.getInstances().getAbsolutePath() );
 
         if ( ! new File( directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" ).exists() )
         {
-            logger.info( "Creating settings.conf" ); logger.debug( "Loading first time.<br> New file will be created." );
+            logger.info( "Creating settings.conf" );
+            logger.debug( "Loading first time.<br> New file will be created." );
 
             try
             {
@@ -186,7 +190,9 @@ public class InfoLauncher
             } catch ( IOException e )
             {
                 logger.fatal( "Couldn't create a file: " + e.getMessage() );
-            } logger.debug( "Saving data for first time." ); save();
+            }
+            logger.debug( "Saving data for first time." );
+            save();
             load();
         } else
         {

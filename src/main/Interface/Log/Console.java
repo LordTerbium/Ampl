@@ -35,11 +35,22 @@ public class Console extends JFrame
     {
 
         // Changes the Look&Feel for the console
-        UIManager.put( "control", COLOR ); UIManager.put( "text", Color.WHITE ); UIManager.put( "nimbusBase", Color.BLACK ); UIManager.put( "nimbusFocus", COLOR ); UIManager.put( "nimbusBorder", COLOR ); UIManager.put( "nimbusLightBackground", COLOR ); UIManager.put( "info", COLOR );
+        UIManager.put( "control", COLOR );
+        UIManager.put( "text", Color.WHITE );
+        UIManager.put( "nimbusBase", Color.BLACK );
+        UIManager.put( "nimbusFocus", COLOR );
+        UIManager.put( "nimbusBorder", COLOR );
+        UIManager.put( "nimbusLightBackground", COLOR );
+        UIManager.put( "info", COLOR );
 
-        setLocation( new Point( 400, 400 ) ); setSize( WIN_SIZE ); setTitle( "Ampl Console" ); setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
+        setLocation( new Point( 400, 400 ) );
+        setSize( WIN_SIZE );
+        setTitle( "Ampl Console" );
+        setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
         // setIconImage(Utils.getImage("/resources/Icon.png"));
-        setLayout( LAYOUT ); setMinimumSize( MIN_SIZE ); setPreferredSize( WIN_SIZE );
+        setLayout( LAYOUT );
+        setMinimumSize( MIN_SIZE );
+        setPreferredSize( WIN_SIZE );
 
         console = new JEditorPane( "text/html", "" )
         {
@@ -51,13 +62,22 @@ public class Console extends JFrame
 
                 return true;
             }
-        }; DefaultCaret defaultCaret = ( DefaultCaret ) console.getCaret(); defaultCaret.setUpdatePolicy( DefaultCaret.ALWAYS_UPDATE );
+        };
+        DefaultCaret defaultCaret = ( DefaultCaret ) console.getCaret();
+        defaultCaret.setUpdatePolicy( DefaultCaret.ALWAYS_UPDATE );
 
-        kit = new HTMLEditorKit(); doc = new HTMLDocument(); console.setBackground( new Color( 53, 54, 53 ) ); console.setEditable( false ); console.setSelectionColor( Color.YELLOW ); console.setEditorKit( kit ); console.setDocument( doc );
+        kit = new HTMLEditorKit();
+        doc = new HTMLDocument();
+        console.setBackground( new Color( 53, 54, 53 ) );
+        console.setEditable( false );
+        console.setSelectionColor( Color.YELLOW );
+        console.setEditorKit( kit );
+        console.setDocument( doc );
 
         initContextMenu();
 
-        scrollPane = new JScrollPane( console, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED ); add( scrollPane, BorderLayout.CENTER );
+        scrollPane = new JScrollPane( console, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
+        add( scrollPane, BorderLayout.CENTER );
 
     }
 
@@ -66,23 +86,30 @@ public class Console extends JFrame
 
         contextMenu = new JPopupMenu();
 
-        copy = new JMenuItem( "Copy to Clipboard" ); copy.addActionListener( new ActionListener()
-    {
-        public void actionPerformed ( ActionEvent e )
+        copy = new JMenuItem( "Copy to Clipboard" );
+        copy.addActionListener( new ActionListener()
         {
+            public void actionPerformed ( ActionEvent e )
+            {
 
-            StringSelection select = new StringSelection( console.getSelectedText() ); Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); clipboard.setContents( select, null );
-        }
-    } );
+                StringSelection select = new StringSelection( console.getSelectedText() );
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents( select, null );
+            }
+        } );
 
-        clear = new JMenuItem( "Clear console" ); clear.addActionListener( new ActionListener()
-    {
-        public void actionPerformed ( ActionEvent e )
+        clear = new JMenuItem( "Clear console" );
+        clear.addActionListener( new ActionListener()
         {
+            public void actionPerformed ( ActionEvent e )
+            {
 
-            console.setText( null ); logger.info( "<font color=\"green\">Cleared Console</font>" );
-        }
-    } ); contextMenu.add( copy ); contextMenu.add( clear );
+                console.setText( null );
+                logger.info( "<font color=\"green\">Cleared Console</font>" );
+            }
+        } );
+        contextMenu.add( copy );
+        contextMenu.add( clear );
 
         console.addMouseListener( new MouseAdapter()
         {
@@ -93,7 +120,8 @@ public class Console extends JFrame
                 {
                     if ( console.getSelectedText() == null )
                     {
-                        contextMenu.getComponent( 0 ).setEnabled( false ); contextMenu.show( console, e.getX(), e.getY() );
+                        contextMenu.getComponent( 0 ).setEnabled( false );
+                        contextMenu.show( console, e.getX(), e.getY() );
                     } else
                     {
                         contextMenu.show( console, e.getX(), e.getY() );

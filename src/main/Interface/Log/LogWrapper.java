@@ -32,17 +32,29 @@ public class LogWrapper
     public static void setupLogger ()
     {
 
-        Logger LOGGER = Logger.getLogger( "" ); FileHandler fileTxt = null; try
-    {
-        fileTxt = new FileHandler( "MyLogger%g.log", 10000000, 3, false );
-    } catch ( SecurityException e )
-    {
-        JOptionPane.showMessageDialog( null, "Error", "Security Exception: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
-    } catch ( IOException e )
-    {
-        JOptionPane.showMessageDialog( null, "Error", "I am missing read and write permissions: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
-    } SimpleFormatter formatterTxt = new SimpleFormatter(); fileTxt.setFormatter( formatterTxt ); HtmlFormatter formatterHtml = new HtmlFormatter(); ConsoleHandler consoleHtml = new ConsoleHandler(); consoleHtml.setLevel( Level.FINE ); consoleHtml.setFormatter( formatterHtml ); LOGGER.setUseParentHandlers( true ); LOGGER.addHandler( fileTxt );
-        LOGGER.addHandler( consoleHtml ); LOGGER.setLevel( Level.INFO ); Logger.getLogger( "main" ).setLevel( Level.ALL );
+        Logger LOGGER = Logger.getLogger( "" );
+        FileHandler fileTxt = null;
+        try
+        {
+            fileTxt = new FileHandler( "MyLogger%g.log", 10000000, 3, false );
+        } catch ( SecurityException e )
+        {
+            JOptionPane.showMessageDialog( null, "Error", "Security Exception: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
+        } catch ( IOException e )
+        {
+            JOptionPane.showMessageDialog( null, "Error", "I am missing read and write permissions: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
+        }
+        SimpleFormatter formatterTxt = new SimpleFormatter();
+        fileTxt.setFormatter( formatterTxt );
+        HtmlFormatter formatterHtml = new HtmlFormatter();
+        ConsoleHandler consoleHtml = new ConsoleHandler();
+        consoleHtml.setLevel( Level.FINE );
+        consoleHtml.setFormatter( formatterHtml );
+        LOGGER.setUseParentHandlers( true );
+        LOGGER.addHandler( fileTxt );
+        LOGGER.addHandler( consoleHtml );
+        LOGGER.setLevel( Level.INFO );
+        Logger.getLogger( "main" ).setLevel( Level.ALL );
     }
 
     /**
@@ -54,7 +66,8 @@ public class LogWrapper
     public static LogWrapper getLogger ( Class<?> c )
     {
 
-        LogWrapper logWrapper = new LogWrapper( c ); return logWrapper;
+        LogWrapper logWrapper = new LogWrapper( c );
+        return logWrapper;
     }
 
     /**
