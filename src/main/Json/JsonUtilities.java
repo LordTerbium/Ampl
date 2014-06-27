@@ -15,70 +15,68 @@ import java.io.IOException;
  *
  * @author Max
  */
-public class JsonUtilities {
+public class JsonUtilities
+{
 
     private final static LogWrapper logger = LogWrapper.getLogger( JsonUtilities.class );
 
-    private JsonUtilities () {
+    private JsonUtilities ()
+    {
         // Nothing in here
     }
 
     /**
-     * The method saves any provided json-structured class to the given file. It serializes the content in a
-     * human-readable way and also serializes nulls.
+     * The method saves any provided json-structured class to the given file. It serializes the content in a human-readable way and also serializes nulls.
      *
      * @param jsonModel is the object with the json structure inside.
      * @param filePath  is the location where the file will be saved.
      */
-    public static void save ( Object jsonModel, String filePath ) {
+    public static void save ( Object jsonModel, String filePath )
+    {
 
         logger.debug( "Creating GsonBuilder." );
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
-        logger.debug( "Parsing data..." );
+        Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create(); logger.debug( "Parsing data..." );
 
         String content = gson.toJson( jsonModel );
 
         logger.debug( "Finished parsing data.<br> Writing  now to the file." );
 
-        try {
-            FileWriter writer = new FileWriter( filePath );
-            logger.debug( "Writing to " + filePath );
-            writer.write( content );
-            writer.close();
-            logger.debug( "Saved changes to the file." );
-        } catch ( IOException e ) {
-            logger.fatal(
-                    "You are executing the launcher from a location without write permission.</br> Change this to " +
-                            "save any options.<br>" +
-                            e.getMessage() );
+        try
+        {
+            FileWriter writer = new FileWriter( filePath ); logger.debug( "Writing to " + filePath ); writer.write( content ); writer.close(); logger.debug( "Saved changes to the file." );
+        } catch ( IOException e )
+        {
+            logger.fatal( "You are executing the launcher from a location without write permission.</br> Change this to " +
+                          "save any options.<br>" +
+                          e.getMessage() );
         }
     }
 
-    public static Object load ( Object jsonModel, String filePath ) {
+    public static Object load ( Object jsonModel, String filePath )
+    {
 
-        logger.debug( "Initialize de-serializer ..." );
-        Gson gson = new Gson();
+        logger.debug( "Initialize de-serializer ..." ); Gson gson = new Gson();
 
-        try {
+        try
+        {
 
-            logger.debug( "Reading data from file ..." );
-            BufferedReader br = new BufferedReader( new FileReader( filePath ) );
+            logger.debug( "Reading data from file ..." ); BufferedReader br = new BufferedReader( new FileReader( filePath ) );
 
 
-            logger.debug( "De-serializing data ..." );
-            jsonModel = gson.fromJson( br, jsonModel.getClass() );
+            logger.debug( "De-serializing data ..." ); jsonModel = gson.fromJson( br, jsonModel.getClass() );
 
-        } catch ( IOException e ) {
+        } catch ( IOException e )
+        {
 
             logger.error( "Couldn't find the file. Try to restart the application.<br>" + e.getMessage() );
 
-        } catch ( JsonSyntaxException e ) {
+        } catch ( JsonSyntaxException e )
+        {
 
             logger.error( "Couldn't read the file. Did you change something?<br>" + e.getMessage() );
 
-        }
-        logger.debug( "Finished de-serializing." );
+        } logger.debug( "Finished de-serializing." );
 
         return jsonModel;
     }

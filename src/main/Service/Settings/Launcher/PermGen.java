@@ -5,7 +5,8 @@ package main.Service.Settings.Launcher;
  *
  * @author Max
  */
-public class PermGen {
+public class PermGen
+{
 
     private int minGen = 1024;
     private int maxGen = 2048;
@@ -15,7 +16,8 @@ public class PermGen {
      *
      * @return the minGen in MB.
      */
-    public int getMinGen() {
+    public int getMinGen ()
+    {
 
         return minGen;
     }
@@ -25,7 +27,8 @@ public class PermGen {
      *
      * @param minGen the minRam to set in MB.
      */
-    public void setMinGen(int minGen) {
+    public void setMinGen ( int minGen )
+    {
 
         this.minGen = minGen;
     }
@@ -35,7 +38,8 @@ public class PermGen {
      *
      * @return the maxGen in MB.
      */
-    public int getMaxGen() {
+    public int getMaxGen ()
+    {
 
         return maxGen;
     }
@@ -45,7 +49,8 @@ public class PermGen {
      *
      * @param maxGen the maximal PermGen to set in MB.
      */
-    public void setMaxGen(int maxGen) {
+    public void setMaxGen ( int maxGen )
+    {
 
         this.maxGen = maxGen;
     }

@@ -18,33 +18,39 @@ import java.util.logging.Level;
  *
  * @author Max
  */
-public class InfoLauncher {
+public class InfoLauncher
+{
 
-    private transient static final LogWrapper logger = LogWrapper
-            .getLogger(InfoLauncher.class);
+    private transient static final LogWrapper   logger    = LogWrapper.getLogger( InfoLauncher.class );
+    private transient static       InfoLauncher _instance = new InfoLauncher( Directories.instance() );
     private transient Directories directories;
-    private Location location = new Location();
-    private Dimension size = new Dimension(500, 500);
-    private Ram ram = new Ram();
-    private PermGen permGen = new PermGen();
-    private int logLevel = 800;
-    private int keepLauncherOpen = 0;
-    private List<String> javaArgs = new ArrayList<String>();
+    private Location     location         = new Location();
+    private Dimension    size             = new Dimension( 500, 500 );
+    private Ram          ram              = new Ram();
+    private PermGen      permGen          = new PermGen();
+    private int          logLevel         = 800;
+    private int          keepLauncherOpen = 0;
+    private List<String> javaArgs         = new ArrayList<String>();
     private InfoLauncher data;
 
-    protected InfoLauncher(Directories directories) {
+    private InfoLauncher ( Directories directories )
+    {
 
         this.directories = directories;
     }
 
+    public static InfoLauncher instance ()
+    {
+        return _instance;
+    }
+
     /**
-     * Returns the position of the launcher window and of the Minecraft window. This class contains no direct
-     * coordinates. It stores the monitor and the coordinates from his border.
+     * Returns the position of the launcher window and of the Minecraft window. This class contains no direct coordinates. It stores the monitor and the coordinates from his border.
      *
-     * @return the location as a Location instance. To get the coordinates you have to get the values contained in the
-     * class.
+     * @return the location as a Location instance. To get the coordinates you have to get the values contained in the class.
      */
-    public Location getLocation() {
+    public Location getLocation ()
+    {
 
         return location;
     }
@@ -54,7 +60,8 @@ public class InfoLauncher {
      *
      * @return the size as a Dimension.
      */
-    public Dimension getSize() {
+    public Dimension getSize ()
+    {
 
         return size;
     }
@@ -64,7 +71,8 @@ public class InfoLauncher {
      *
      * @param size the Dimension object with the height and width of the launcher.
      */
-    public void setSize(Dimension size) {
+    public void setSize ( Dimension size )
+    {
 
         this.size = size;
     }
@@ -74,7 +82,8 @@ public class InfoLauncher {
      *
      * @return the RAM object.
      */
-    public Ram getRam() {
+    public Ram getRam ()
+    {
 
         return ram;
     }
@@ -84,7 +93,8 @@ public class InfoLauncher {
      *
      * @return the permGen object.
      */
-    public PermGen getPermGen() {
+    public PermGen getPermGen ()
+    {
 
         return permGen;
     }
@@ -94,9 +104,10 @@ public class InfoLauncher {
      *
      * @return the Level object for the rootLogger.
      */
-    public Level getLogLevel() {
+    public Level getLogLevel ()
+    {
 
-        return Level.parse(Integer.toString(logLevel));
+        return Level.parse( Integer.toString( logLevel ) );
     }
 
     /**
@@ -104,29 +115,30 @@ public class InfoLauncher {
      *
      * @param logLevel the Level object.
      */
-    public void setLogLevel(Level logLevel) {
+    public void setLogLevel ( Level logLevel )
+    {
 
         this.logLevel = logLevel.intValue();
     }
 
     /**
-     * Returns the stored behavior of the launcher when Minecraft was started. 0 means "keep open", 1 means "close when
-     * starting", 2 means "close by start and open after closing the game.
+     * Returns the stored behavior of the launcher when Minecraft was started. 0 means "keep open", 1 means "close when starting", 2 means "close by start and open after closing the game.
      *
      * @return the int value of the behavior.
      */
-    public int getKeepLauncherOpen() {
+    public int getKeepLauncherOpen ()
+    {
 
         return keepLauncherOpen;
     }
 
     /**
-     * Sets the behavior of the launcher after starting Minecraft. 0 means "keep open", 1 means "close when starting", 2
-     * means "close by start and open after closing the game.
+     * Sets the behavior of the launcher after starting Minecraft. 0 means "keep open", 1 means "close when starting", 2 means "close by start and open after closing the game.
      *
      * @param keepLauncherOpen the behavior of the launcher to store.
      */
-    public void setKeepLauncherOpen(int keepLauncherOpen) {
+    public void setKeepLauncherOpen ( int keepLauncherOpen )
+    {
 
         this.keepLauncherOpen = keepLauncherOpen;
     }
@@ -136,7 +148,8 @@ public class InfoLauncher {
      *
      * @return the list object containing the javaArguments.
      */
-    public List<String> getJavaArgs() {
+    public List<String> getJavaArgs ()
+    {
 
         return javaArgs;
     }
@@ -146,42 +159,46 @@ public class InfoLauncher {
      *
      * @param javaArgs the list object to set.
      */
-    public void setJavaArgs(List<String> javaArgs) {
+    public void setJavaArgs ( List<String> javaArgs )
+    {
 
         this.javaArgs = javaArgs;
     }
 
-    public void save ( InfoLauncher data ) {
+    public void save ()
+    {
 
-        logger.info("Saving data.");
-        logger.debug("Saving launcher config to " + directories.getInstances().getAbsolutePath());
-        JsonUtilities.save( data, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
+        logger.info( "Saving data." ); logger.debug( "Saving launcher config to " + directories.getInstances().getAbsolutePath() ); JsonUtilities.save( InfoLauncher.instance(), directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
     }
 
-    public InfoLauncher load () {
+    public void load ()
+    {
 
-        logger.info("Loading data.");
-        logger.debug("Loading launcher config from " + directories.getInstances().getAbsolutePath());
+        logger.info( "Loading data." ); logger.debug( "Loading launcher config from " + directories.getInstances().getAbsolutePath() );
 
-        if (! new File(directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf").exists()) {
-            logger.info("Creating settings.conf");
-            logger.debug("Loading first time.<br> New file will be created.");
+        if ( ! new File( directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" ).exists() )
+        {
+            logger.info( "Creating settings.conf" ); logger.debug( "Loading first time.<br> New file will be created." );
 
-            try {
-                new File(directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf")
-                        .createNewFile();
-            } catch (IOException e) {
-                logger.fatal("Couldn't create a file: " + e.getMessage());
-            }
-            logger.debug("Saving data for first time.");
-            save( new InfoLauncher( directories ) );
+            try
+            {
+                new File( directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" ).createNewFile();
+            } catch ( IOException e )
+            {
+                logger.fatal( "Couldn't create a file: " + e.getMessage() );
+            } logger.debug( "Saving data for first time." ); save();
             load();
-        } else {
-            data = ( InfoLauncher ) JsonUtilities
-                    .load( this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
+        } else
+        {
+            data = ( InfoLauncher ) JsonUtilities.load( this, directories.getInstances().getAbsolutePath() + File.separator + "settigns.conf" );
             data.directories = this.directories;
         }
 
-        return data;
+        setInfoLauncher( data );
+    }
+
+    private synchronized void setInfoLauncher ( InfoLauncher infoLauncher )
+    {
+        _instance = infoLauncher;
     }
 }

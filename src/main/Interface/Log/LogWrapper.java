@@ -5,14 +5,13 @@ import java.io.IOException;
 import java.util.logging.*;
 
 /**
- * The class provides a smart solution for a often changing problem: how to log information. The class wraps all the
- * needed functions for the whole programm and passes the input to the corresponding framework, at the time of writing
- * the java.util.Logger . By adding this log-wrapper not only the entire code uses the same 6 functions but it also
+ * The class provides a smart solution for a often changing problem: how to log information. The class wraps all the needed functions for the whole programm and passes the input to the corresponding framework, at the time of writing the java.util.Logger . By adding this log-wrapper not only the entire code uses the same 6 functions but it also
  * automatically adds two handlers: a custom console handler and a file handler.
  *
  * @author Max
  */
-public class LogWrapper {
+public class LogWrapper
+{
 
     private Logger logger = null;
 
@@ -21,7 +20,8 @@ public class LogWrapper {
      *
      * @param c is the class object of the created logger.
      */
-    private LogWrapper ( Class<?> c ) {
+    private LogWrapper ( Class<?> c )
+    {
 
         this.logger = Logger.getLogger( c.getName() );
     }
@@ -29,43 +29,32 @@ public class LogWrapper {
     /**
      * The method should be called when the application starts, so that all following loggers will take this settings.
      */
-    public static void setupLogger () {
+    public static void setupLogger ()
+    {
 
-        Logger LOGGER = Logger.getLogger( "" );
-        FileHandler fileTxt = null;
-        try {
-            fileTxt = new FileHandler( "MyLogger%g.log", 10000000, 3, false );
-        } catch ( SecurityException e ) {
-            JOptionPane.showMessageDialog( null, "Error", "Security Exception: " + e.getLocalizedMessage(),
-                    JOptionPane.ERROR_MESSAGE );
-        } catch ( IOException e ) {
-            JOptionPane.showMessageDialog( null, "Error",
-                    "I am missing read and write permissions: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
-        }
-        SimpleFormatter formatterTxt = new SimpleFormatter();
-        fileTxt.setFormatter( formatterTxt );
-        HtmlFormatter formatterHtml = new HtmlFormatter();
-        ConsoleHandler consoleHtml = new ConsoleHandler();
-        consoleHtml.setLevel( Level.FINE );
-        consoleHtml.setFormatter( formatterHtml );
-        LOGGER.setUseParentHandlers( true );
-        LOGGER.addHandler( fileTxt );
-        LOGGER.addHandler( consoleHtml );
-        LOGGER.setLevel( Level.INFO );
-        Logger.getLogger( "main" ).setLevel( Level.ALL );
+        Logger LOGGER = Logger.getLogger( "" ); FileHandler fileTxt = null; try
+    {
+        fileTxt = new FileHandler( "MyLogger%g.log", 10000000, 3, false );
+    } catch ( SecurityException e )
+    {
+        JOptionPane.showMessageDialog( null, "Error", "Security Exception: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
+    } catch ( IOException e )
+    {
+        JOptionPane.showMessageDialog( null, "Error", "I am missing read and write permissions: " + e.getLocalizedMessage(), JOptionPane.ERROR_MESSAGE );
+    } SimpleFormatter formatterTxt = new SimpleFormatter(); fileTxt.setFormatter( formatterTxt ); HtmlFormatter formatterHtml = new HtmlFormatter(); ConsoleHandler consoleHtml = new ConsoleHandler(); consoleHtml.setLevel( Level.FINE ); consoleHtml.setFormatter( formatterHtml ); LOGGER.setUseParentHandlers( true ); LOGGER.addHandler( fileTxt );
+        LOGGER.addHandler( consoleHtml ); LOGGER.setLevel( Level.INFO ); Logger.getLogger( "main" ).setLevel( Level.ALL );
     }
 
     /**
-     * The method tries to get the name of the class where the log comes from. If it already exist it will use the old
-     * one, saving memory and calculation power. New logger will be added to that list.
+     * The method tries to get the name of the class where the log comes from. If it already exist it will use the old one, saving memory and calculation power. New logger will be added to that list.
      *
      * @param c is the class object of the created logger.
      * @return the LogWrapper object with an attached java.util.logging logger.
      */
-    public static LogWrapper getLogger ( Class<?> c ) {
+    public static LogWrapper getLogger ( Class<?> c )
+    {
 
-        LogWrapper logWrapper = new LogWrapper( c );
-        return logWrapper;
+        LogWrapper logWrapper = new LogWrapper( c ); return logWrapper;
     }
 
     /**
@@ -73,7 +62,8 @@ public class LogWrapper {
      *
      * @return a boolean telling the ability to log the required level.
      */
-    public boolean isFatalLoggable () {
+    public boolean isFatalLoggable ()
+    {
 
         return logger.isLoggable( Level.SEVERE );
     }
@@ -83,7 +73,8 @@ public class LogWrapper {
      *
      * @return a boolean telling the ability to log the required level.
      */
-    public boolean isErrorLoggable () {
+    public boolean isErrorLoggable ()
+    {
 
         return logger.isLoggable( Level.WARNING );
     }
@@ -93,7 +84,8 @@ public class LogWrapper {
      *
      * @return a boolean telling the ability to log the required level.
      */
-    public boolean isConfigLoggable () {
+    public boolean isConfigLoggable ()
+    {
 
         return logger.isLoggable( Level.CONFIG );
     }
@@ -103,7 +95,8 @@ public class LogWrapper {
      *
      * @return a boolean telling the ability to log the required level.
      */
-    public boolean isInfoLoggable () {
+    public boolean isInfoLoggable ()
+    {
 
         return logger.isLoggable( Level.INFO );
     }
@@ -113,7 +106,8 @@ public class LogWrapper {
      *
      * @return a boolean telling the ability to log the required level.
      */
-    public boolean isDebugLoggable () {
+    public boolean isDebugLoggable ()
+    {
 
         return logger.isLoggable( Level.FINE );
     }
@@ -123,18 +117,19 @@ public class LogWrapper {
      *
      * @param message is a String containing the text to log.
      */
-    public void fatal ( String message ) {
+    public void fatal ( String message )
+    {
 
         logger.severe( message );
     }
 
     /**
-     * The method parses a log with the level fatal, equivalent to severe, to the underlying logging framework. By using
-     * this method you can also prompt the stack-trace.
+     * The method parses a log with the level fatal, equivalent to severe, to the underlying logging framework. By using this method you can also prompt the stack-trace.
      *
      * @param message is a String containing the text to log.
      */
-    public void fatal ( String message, Throwable t ) {
+    public void fatal ( String message, Throwable t )
+    {
 
         logger.log( Level.SEVERE, message, t );
     }
@@ -144,18 +139,19 @@ public class LogWrapper {
      *
      * @param message is a String containing the text to log.
      */
-    public void error ( String message ) {
+    public void error ( String message )
+    {
 
         logger.warning( message );
     }
 
     /**
-     * The method parses a log with the level error, equivalent to warning, to the underlying logging framework. By
-     * using this method you can also prompt the stack-trace.
+     * The method parses a log with the level error, equivalent to warning, to the underlying logging framework. By using this method you can also prompt the stack-trace.
      *
      * @param message is a String containing the text to log.
      */
-    public void error ( String message, Throwable t ) {
+    public void error ( String message, Throwable t )
+    {
 
         logger.log( Level.WARNING, message, t );
     }
@@ -165,7 +161,8 @@ public class LogWrapper {
      *
      * @param message is a String containing the text to log.
      */
-    public void config ( String message ) {
+    public void config ( String message )
+    {
 
         logger.config( message );
     }
@@ -175,7 +172,8 @@ public class LogWrapper {
      *
      * @param message is a String containing the text to log.
      */
-    public void info ( String message ) {
+    public void info ( String message )
+    {
 
         logger.info( message );
     }
@@ -185,7 +183,8 @@ public class LogWrapper {
      *
      * @param message is a String containing the text to log.
      */
-    public void debug ( String message ) {
+    public void debug ( String message )
+    {
 
         logger.fine( message );
     }
@@ -195,7 +194,8 @@ public class LogWrapper {
      *
      * @return a level of the Level class, such as INFO.
      */
-    public Level getLogLevel () {
+    public Level getLogLevel ()
+    {
 
         return LogManager.getLogManager().getLogger( Logger.GLOBAL_LOGGER_NAME ).getLevel();
     }
@@ -205,7 +205,8 @@ public class LogWrapper {
      *
      * @param level is a level of the Level class, such as FINE.
      */
-    public void setLogLevel ( Level level ) {
+    public void setLogLevel ( Level level )
+    {
 
         LogManager.getLogManager().getLogger( Logger.GLOBAL_LOGGER_NAME ).setLevel( level );
     }

@@ -5,7 +5,8 @@ package main.Service.Settings.Launcher;
  *
  * @author Max
  */
-public class Ram {
+public class Ram
+{
 
     private int minRam = 1024;
     private int maxRam = 2048;
@@ -15,7 +16,8 @@ public class Ram {
      *
      * @return the minRam in MB.
      */
-    public int getMinRam() {
+    public int getMinRam ()
+    {
 
         return minRam;
     }
@@ -25,7 +27,8 @@ public class Ram {
      *
      * @param minRam the minRam to set in MB.
      */
-    public void setMinRam(int minRam) {
+    public void setMinRam ( int minRam )
+    {
 
         this.minRam = minRam;
     }
@@ -35,7 +38,8 @@ public class Ram {
      *
      * @return the maxRam in MB.
      */
-    public int getMaxRam() {
+    public int getMaxRam ()
+    {
 
         return maxRam;
     }
@@ -45,7 +49,8 @@ public class Ram {
      *
      * @param maxRam the maxRam to set in MB.
      */
-    public void setMaxRam(int maxRam) {
+    public void setMaxRam ( int maxRam )
+    {
 
         this.maxRam = maxRam;
     }
@@ -56,9 +61,10 @@ public class Ram {
      * @param MB the amount of RAM in MegaBytes.
      * @return the amount of RAM in GigaBytes.
      */
-    public double toGiga(int MB) {
+    public double toGiga ( int MB )
+    {
 
-        return Math.pow(MB, 0.1);
+        return Math.pow( MB, 0.1 );
     }
 
     /**
@@ -67,8 +73,9 @@ public class Ram {
      * @param GB the amount of RAM in GigaBytes.
      * @return the amount of RAM in MegaBytes.
      */
-    public int toMega(double GB) {
+    public int toMega ( double GB )
+    {
 
-        return (int) Math.round((Math.pow(2, 10) * GB));
+        return ( int ) Math.round( ( Math.pow( 2, 10 ) * GB ) );
     }
 }

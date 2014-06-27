@@ -121,8 +121,8 @@ public class Options {
 
     */
 /**
-     * Storage for all options
-     *//*
+ * Storage for all options
+ *//*
 
     public Options() {
         //logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
@@ -150,9 +150,9 @@ public class Options {
 
     */
 /**
-     * Checks all GraphicDevices connencted to the pc and selects where the
-     * Launcher will be opened
-     *//*
+ * Checks all GraphicDevices connencted to the pc and selects where the
+ * Launcher will be opened
+ *//*
 
     public void setScreen() {
 
@@ -178,8 +178,8 @@ public class Options {
 
     */
 /**
-     * Sets all variables with the files
-     *//*
+ * Sets all variables with the files
+ *//*
 
     private void setupFiles() {
 
@@ -228,8 +228,8 @@ public class Options {
 
     */
 /**
-     * Sets the global logger
-     *//*
+ * Sets the global logger
+ *//*
 
     public void initConsole() {
         console = new Console(location);
@@ -239,10 +239,10 @@ public class Options {
 
     */
 /**
-     * Refreshes all variables containing files
-     *
-     * @return true if everything was found
-     *//*
+ * Refreshes all variables containing files
+ *
+ * @return true if everything was found
+ *//*
 
     public void refreshFiles() {
         setupFiles();
@@ -250,8 +250,8 @@ public class Options {
 
     */
 /**
-     * Checks if directories exist. If not it will attempt to create it.
-     *//*
+ * Checks if directories exist. If not it will attempt to create it.
+ *//*
 
     public void checkFiles() {
 
@@ -285,8 +285,8 @@ public class Options {
 
     */
 /**
-     * Method invokes the reading of the options file.
-     *//*
+ * Method invokes the reading of the options file.
+ *//*
 
     public void loadProperties() {
 
@@ -322,8 +322,8 @@ public class Options {
 
     */
 /**
-     * Method invokes the saving of data to the loption file.
-     *//*
+ * Method invokes the saving of data to the loption file.
+ *//*
 
     public void saveProperties(boolean exit) {
 
@@ -367,8 +367,8 @@ public class Options {
 
     */
 /**
-     * @return the home
-     *//*
+ * @return the home
+ *//*
 
     public File getHome() {
         return home;
@@ -376,8 +376,8 @@ public class Options {
 
     */
 /**
-     * @param home the home to set
-     *//*
+ * @param home the home to set
+ *//*
 
     public void setHome(File home) {
         this.home = home;
@@ -385,8 +385,8 @@ public class Options {
 
     */
 /**
-     * @return the files
-     *//*
+ * @return the files
+ *//*
 
     public File getFiles() {
         return files;
@@ -394,8 +394,8 @@ public class Options {
 
     */
 /**
-     * @param files the files to set
-     *//*
+ * @param files the files to set
+ *//*
 
     public void setFiles(File files) {
         this.files = files;
@@ -403,8 +403,8 @@ public class Options {
 
     */
 /**
-     * @return the instances
-     *//*
+ * @return the instances
+ *//*
 
     public File getInstances() {
         return instances;
@@ -412,8 +412,8 @@ public class Options {
 
     */
 /**
-     * @param instances the instances to set
-     *//*
+ * @param instances the instances to set
+ *//*
 
     public void setInstances(File instances) {
         this.instances = instances;
@@ -421,8 +421,8 @@ public class Options {
 
     */
 /**
-     * @return the data
-     *//*
+ * @return the data
+ *//*
 
     public File getData() {
         return data;
@@ -430,8 +430,8 @@ public class Options {
 
     */
 /**
-     * @param data the data to set
-     *//*
+ * @param data the data to set
+ *//*
 
     public void setData(File data) {
         this.data = data;
@@ -439,8 +439,8 @@ public class Options {
 
     */
 /**
-     * @return the modRepo
-     *//*
+ * @return the modRepo
+ *//*
 
     public File getModRepo() {
         return modRepo;
@@ -448,8 +448,8 @@ public class Options {
 
     */
 /**
-     * @param modRepo the modRepo to set
-     *//*
+ * @param modRepo the modRepo to set
+ *//*
 
     public void setModRepo(File modRepo) {
         this.modRepo = modRepo;
@@ -457,8 +457,8 @@ public class Options {
 
     */
 /**
-     * @return the fileRepo
-     *//*
+ * @return the fileRepo
+ *//*
 
     public File getFileRepo() {
         return fileRepo;
@@ -466,8 +466,8 @@ public class Options {
 
     */
 /**
-     * @param fileRepo the fileRepo to set
-     *//*
+ * @param fileRepo the fileRepo to set
+ *//*
 
     public void setFileRepo(File fileRepo) {
         this.fileRepo = fileRepo;
@@ -475,8 +475,8 @@ public class Options {
 
     */
 /**
-     * @return the assets
-     *//*
+ * @return the assets
+ *//*
 
     public File getAssets(File instance) {
         return new File(instance.getAbsolutePath() + assets + File.separator);
@@ -484,8 +484,8 @@ public class Options {
 
     */
 /**
-     * @param assets the assets to set
-     *//*
+ * @param assets the assets to set
+ *//*
 
     public void setAssets(String assets) {
         this.assets = assets;
@@ -493,8 +493,8 @@ public class Options {
 
     */
 /**
-     * @return the libraries
-     *//*
+ * @return the libraries
+ *//*
 
     public File getLibraries(File instance) {
         return new File(instance.getAbsolutePath() + libraries + File.separator);
@@ -502,8 +502,8 @@ public class Options {
 
     */
 /**
-     * @param libraries the libraries to set
-     *//*
+ * @param libraries the libraries to set
+ *//*
 
     public void setLibraries(String libraries) {
         this.libraries = libraries;
@@ -511,8 +511,8 @@ public class Options {
 
     */
 /**
-     * @return the versions
-     *//*
+ * @return the versions
+ *//*
 
     public File getVersions(File instance) {
         return new File(instance.getAbsolutePath() + versions + File.separator);
@@ -520,8 +520,8 @@ public class Options {
 
     */
 /**
-     * @param versions the versions to set
-     *//*
+ * @param versions the versions to set
+ *//*
 
     public void setVersions(String versions) {
         this.versions = versions;
@@ -529,8 +529,8 @@ public class Options {
 
     */
 /**
-     * @return the resources
-     *//*
+ * @return the resources
+ *//*
 
     public File getResources(File instance) {
         return new File(instance.getAbsolutePath() + resources + File.separator);
@@ -538,8 +538,8 @@ public class Options {
 
     */
 /**
-     * @param resources the resources to set
-     *//*
+ * @param resources the resources to set
+ *//*
 
     public void setResources(String resources) {
         this.resources = resources;
@@ -547,8 +547,8 @@ public class Options {
 
     */
 /**
-     * @return the mods
-     *//*
+ * @return the mods
+ *//*
 
     public File getMods(File instance) {
         return new File(instance.getAbsolutePath() + mods + File.separator);
@@ -556,8 +556,8 @@ public class Options {
 
     */
 /**
-     * @param mods the mods to set
-     *//*
+ * @param mods the mods to set
+ *//*
 
     public void setMods(String mods) {
         this.mods = mods;
@@ -565,8 +565,8 @@ public class Options {
 
     */
 /**
-     * @return the configs
-     *//*
+ * @return the configs
+ *//*
 
     public File getConfigs(File instance) {
         return new File(instance.getAbsolutePath() + configs + File.separator);
@@ -574,8 +574,8 @@ public class Options {
 
     */
 /**
-     * @param configs the configs to set
-     *//*
+ * @param configs the configs to set
+ *//*
 
     public void setConfigs(String configs) {
         this.configs = configs;
@@ -583,8 +583,8 @@ public class Options {
 
     */
 /**
-     * @return the minecraftVersions
-     *//*
+ * @return the minecraftVersions
+ *//*
 
     public File getMinecraftVersions() {
         return minecraftVersions;
@@ -592,8 +592,8 @@ public class Options {
 
     */
 /**
-     * @param minecraftVersions the minecraftVersions to set
-     *//*
+ * @param minecraftVersions the minecraftVersions to set
+ *//*
 
     public void setMinecraftVersions(File minecraftVersions) {
         this.minecraftVersions = minecraftVersions;
@@ -601,8 +601,8 @@ public class Options {
 
     */
 /**
-     * @return the forgeVersions
-     *//*
+ * @return the forgeVersions
+ *//*
 
     public File getForgeVersions() {
         return forgeVersions;
@@ -610,8 +610,8 @@ public class Options {
 
     */
 /**
-     * @param forgeVersions the forgeVersions to set
-     *//*
+ * @param forgeVersions the forgeVersions to set
+ *//*
 
     public void setForgeVersions(File forgeVersions) {
         this.forgeVersions = forgeVersions;
@@ -619,8 +619,8 @@ public class Options {
 
     */
 /**
-     * @return the packs
-     *//*
+ * @return the packs
+ *//*
 
     public File getPacks() {
         return packs;
@@ -628,8 +628,8 @@ public class Options {
 
     */
 /**
-     * @param packs the packs to set
-     *//*
+ * @param packs the packs to set
+ *//*
 
     public void setPacks(File packs) {
         this.packs = packs;
@@ -637,8 +637,8 @@ public class Options {
 
     */
 /**
-     * @return the options
-     *//*
+ * @return the options
+ *//*
 
     public File getOptions() {
         return options;
@@ -646,8 +646,8 @@ public class Options {
 
     */
 /**
-     * @param options the options to set
-     *//*
+ * @param options the options to set
+ *//*
 
     public void setOptions(File options) {
         this.options = options;
@@ -655,8 +655,8 @@ public class Options {
 
     */
 /**
-     * @return the modList
-     *//*
+ * @return the modList
+ *//*
 
     public File getModList() {
         return modList;
@@ -664,8 +664,8 @@ public class Options {
 
     */
 /**
-     * @param modList the modList to set
-     *//*
+ * @param modList the modList to set
+ *//*
 
     public void setModList(File modList) {
         this.modList = modList;
@@ -673,8 +673,8 @@ public class Options {
 
     */
 /**
-     * @return the configList
-     *//*
+ * @return the configList
+ *//*
 
     public File getConfigList() {
         return configList;
@@ -682,8 +682,8 @@ public class Options {
 
     */
 /**
-     * @param configList the configList to set
-     *//*
+ * @param configList the configList to set
+ *//*
 
     public void setConfigList(File configList) {
         this.configList = configList;
@@ -691,8 +691,8 @@ public class Options {
 
     */
 /**
-     * @return the console
-     *//*
+ * @return the console
+ *//*
 
     public Console getConsole() {
         return console;
@@ -700,8 +700,8 @@ public class Options {
 
     */
 /**
-     * @param console the console to set
-     *//*
+ * @param console the console to set
+ *//*
 
     public void setConsole(Console console) {
         this.console = console;
@@ -709,8 +709,8 @@ public class Options {
 
     */
 /**
-     * @return the serverLogin
-     *//*
+ * @return the serverLogin
+ *//*
 
     public ftpData getServerLogin() {
         return serverLogin;
@@ -718,8 +718,8 @@ public class Options {
 
     */
 /**
-     * @param serverLogin the serverLogin to set
-     *//*
+ * @param serverLogin the serverLogin to set
+ *//*
 
     public void setServerLogin(ftpData serverLogin) {
         this.serverLogin = serverLogin;
@@ -727,8 +727,8 @@ public class Options {
 
     */
 /**
-     * @return the vJson
-     *//*
+ * @return the vJson
+ *//*
 
     public String getvJson() {
         return vJson;
@@ -736,8 +736,8 @@ public class Options {
 
     */
 /**
-     * @param vJson the vJson to set
-     *//*
+ * @param vJson the vJson to set
+ *//*
 
     public void setvJson(String vJson) {
         this.vJson = vJson;
@@ -745,8 +745,8 @@ public class Options {
 
     */
 /**
-     * @return the assJson
-     *//*
+ * @return the assJson
+ *//*
 
     public String getAssJson() {
         return assJson;
@@ -754,8 +754,8 @@ public class Options {
 
     */
 /**
-     * @param assJson the assJson to set
-     *//*
+ * @param assJson the assJson to set
+ *//*
 
     public void setAssJson(String assJson) {
         this.assJson = assJson;
@@ -763,8 +763,8 @@ public class Options {
 
     */
 /**
-     * @return the ftpJson
-     *//*
+ * @return the ftpJson
+ *//*
 
     public String getFtpJson() {
         return ftpJson;
@@ -772,8 +772,8 @@ public class Options {
 
     */
 /**
-     * @param ftpJson the ftpJson to set
-     *//*
+ * @param ftpJson the ftpJson to set
+ *//*
 
     public void setFtpJson(String ftpJson) {
         this.ftpJson = ftpJson;
@@ -781,8 +781,8 @@ public class Options {
 
     */
 /**
-     * @return the logFile
-     *//*
+ * @return the logFile
+ *//*
 
     public String getLogFile() {
         return logFile;
@@ -790,8 +790,8 @@ public class Options {
 
     */
 /**
-     * @param logFile the logFile to set
-     *//*
+ * @param logFile the logFile to set
+ *//*
 
     public void setLogFile(String logFile) {
         this.logFile = logFile;
@@ -799,8 +799,8 @@ public class Options {
 
     */
 /**
-     * @return the temp
-     *//*
+ * @return the temp
+ *//*
 
     public File getTemp() {
         return temp;
@@ -808,8 +808,8 @@ public class Options {
 
     */
 /**
-     * @param temp the temp to set
-     *//*
+ * @param temp the temp to set
+ *//*
 
     public void setTemp(File temp) {
         this.temp = temp;
@@ -817,8 +817,8 @@ public class Options {
 
     */
 /**
-     * @return the mcVersions
-     *//*
+ * @return the mcVersions
+ *//*
 
     public List<File> getMcVersions() {
         return mcVersions;
@@ -826,8 +826,8 @@ public class Options {
 
     */
 /**
-     * @param mcVersions the mcVersions to set
-     *//*
+ * @param mcVersions the mcVersions to set
+ *//*
 
     public void setMcVersions(List<File> mcVersions) {
         this.mcVersions = mcVersions;
@@ -835,8 +835,8 @@ public class Options {
 
     */
 /**
-     * @return the fgVersions
-     *//*
+ * @return the fgVersions
+ *//*
 
     public List<File> getFgVersions() {
         return fgVersions;
@@ -844,8 +844,8 @@ public class Options {
 
     */
 /**
-     * @param fgVersions the fgVersions to set
-     *//*
+ * @param fgVersions the fgVersions to set
+ *//*
 
     public void setFgVersions(List<File> fgVersions) {
         this.fgVersions = fgVersions;
@@ -853,8 +853,8 @@ public class Options {
 
     */
 /**
-     * @return the legacyConfigs
-     *//*
+ * @return the legacyConfigs
+ *//*
 
     public File getLegacyConfigs() {
         return legacyConfigs;
@@ -862,8 +862,8 @@ public class Options {
 
     */
 /**
-     * @param legacyConfigs the legacyConfigs to set
-     *//*
+ * @param legacyConfigs the legacyConfigs to set
+ *//*
 
     public void setLegacyConfigs(File legacyConfigs) {
         this.legacyConfigs = legacyConfigs;
@@ -871,8 +871,8 @@ public class Options {
 
     */
 /**
-     * @return the legacyMods
-     *//*
+ * @return the legacyMods
+ *//*
 
     public File getLegacyMods() {
         return legacyMods;
@@ -880,8 +880,8 @@ public class Options {
 
     */
 /**
-     * @param legacyMods the legacyMods to set
-     *//*
+ * @param legacyMods the legacyMods to set
+ *//*
 
     public void setLegacyMods(File legacyMods) {
         this.legacyMods = legacyMods;
@@ -889,8 +889,8 @@ public class Options {
 
     */
 /**
-     * @return the instanceList
-     *//*
+ * @return the instanceList
+ *//*
 
     public List<File> getInstanceList() {
         instanceList = Arrays.asList(packs.listFiles());
@@ -899,8 +899,8 @@ public class Options {
 
     */
 /**
-     * @return the gDev
-     *//*
+ * @return the gDev
+ *//*
 
     public GraphicsDevice[] getGDev() {
         return GDev;
@@ -908,8 +908,8 @@ public class Options {
 
     */
 /**
-     * @return the location
-     *//*
+ * @return the location
+ *//*
 
     public Point getLocation() {
         return location;
@@ -917,8 +917,8 @@ public class Options {
 
     */
 /**
-     * @param location the location to set
-     *//*
+ * @param location the location to set
+ *//*
 
     public void setLocation(Point location) {
         this.location = location;
@@ -926,8 +926,8 @@ public class Options {
 
     */
 /**
-     * @return the build
-     *//*
+ * @return the build
+ *//*
 
     public Build getBuild() {
         return Build.getType(build);
@@ -935,8 +935,8 @@ public class Options {
 
     */
 /**
-     * @param build the build to set
-     *//*
+ * @param build the build to set
+ *//*
 
     public void setBuild(Build build) {
         this.build = build.getValue();
@@ -944,8 +944,8 @@ public class Options {
 
     */
 /**
-     * @return the showConsole
-     *//*
+ * @return the showConsole
+ *//*
 
     public boolean isShowConsole() {
         return showConsole;
@@ -953,8 +953,8 @@ public class Options {
 
     */
 /**
-     * @param showConsole the showConsole to set
-     *//*
+ * @param showConsole the showConsole to set
+ *//*
 
     public void setShowConsole(boolean showConsole) {
         this.showConsole = showConsole;
@@ -962,8 +962,8 @@ public class Options {
 
     */
 /**
-     * @return the logLevel
-     *//*
+ * @return the logLevel
+ *//*
 
     public int getLogLevel() {
         return logLevel;
@@ -971,8 +971,8 @@ public class Options {
 
     */
 /**
-     * @param logLevel the logLevel to set
-     *//*
+ * @param logLevel the logLevel to set
+ *//*
 
     public void setLogLevel(int logLevel) {
         this.logLevel = logLevel;
@@ -980,8 +980,8 @@ public class Options {
 
     */
 /**
-     * @return the forgeLogLeve
-     *//*
+ * @return the forgeLogLeve
+ *//*
 
     public int getForgeLogLeve() {
         return forgeLogLevel;
@@ -989,8 +989,8 @@ public class Options {
 
     */
 /**
-     * @param forgeLogLeve the forgeLogLeve to set
-     *//*
+ * @param forgeLogLeve the forgeLogLeve to set
+ *//*
 
     public void setForgeLogLeve(int forgeLogLeve) {
         this.forgeLogLevel = forgeLogLeve;
@@ -998,8 +998,8 @@ public class Options {
 
     */
 /**
-     * @return the showConsoleByLevel
-     *//*
+ * @return the showConsoleByLevel
+ *//*
 
     public int getShowConsoleByLevel() {
         return showConsoleByLevel;
@@ -1007,8 +1007,8 @@ public class Options {
 
     */
 /**
-     * @param showConsoleByLevel the showConsoleByLevel to set
-     *//*
+ * @param showConsoleByLevel the showConsoleByLevel to set
+ *//*
 
     public void setShowConsoleByLevel(int showConsoleByLevel) {
         this.showConsoleByLevel = showConsoleByLevel;
@@ -1016,8 +1016,8 @@ public class Options {
 
     */
 /**
-     * @return the maxRam
-     *//*
+ * @return the maxRam
+ *//*
 
     public int getMaxRam() {
         return maxRam;
@@ -1025,8 +1025,8 @@ public class Options {
 
     */
 /**
-     * @param maxRam the maxRam to set
-     *//*
+ * @param maxRam the maxRam to set
+ *//*
 
     public void setMaxRam(int maxRam) {
         this.maxRam = maxRam;
@@ -1034,8 +1034,8 @@ public class Options {
 
     */
 /**
-     * @return the maxPermGen
-     *//*
+ * @return the maxPermGen
+ *//*
 
     public int getMaxPermGen() {
         return maxPermGen;
@@ -1043,8 +1043,8 @@ public class Options {
 
     */
 /**
-     * @param maxPermGen the maxPermGen to set
-     *//*
+ * @param maxPermGen the maxPermGen to set
+ *//*
 
     public void setMaxPermGen(int maxPermGen) {
         this.maxPermGen = maxPermGen;
@@ -1052,8 +1052,8 @@ public class Options {
 
     */
 /**
-     * @return the size
-     *//*
+ * @return the size
+ *//*
 
     public Dimension getSize() {
         return size;
@@ -1061,8 +1061,8 @@ public class Options {
 
     */
 /**
-     * @param size the size to set
-     *//*
+ * @param size the size to set
+ *//*
 
     public void setSize(Dimension size) {
         this.size = size;
@@ -1070,8 +1070,8 @@ public class Options {
 
     */
 /**
-     * @return the gDevice
-     *//*
+ * @return the gDevice
+ *//*
 
     public int getGDevice() {
         return GDevice;
@@ -1079,8 +1079,8 @@ public class Options {
 
     */
 /**
-     * @param gDevice the gDevice to set
-     *//*
+ * @param gDevice the gDevice to set
+ *//*
 
     public void setGDevice(int gDevice) {
         GDevice = gDevice;
@@ -1088,8 +1088,8 @@ public class Options {
 
     */
 /**
-     * @return the maximisedMc
-     *//*
+ * @return the maximisedMc
+ *//*
 
     public boolean isMaximisedMc() {
         return maximisedMc;
@@ -1097,8 +1097,8 @@ public class Options {
 
     */
 /**
-     * @param maximisedMc the maximisedMc to set
-     *//*
+ * @param maximisedMc the maximisedMc to set
+ *//*
 
     public void setMaximisedMc(boolean maximisedMc) {
         this.maximisedMc = maximisedMc;
@@ -1106,8 +1106,8 @@ public class Options {
 
     */
 /**
-     * @return the javaArgs
-     *//*
+ * @return the javaArgs
+ *//*
 
     public String getJavaArgs() {
         return javaArgs;
@@ -1115,8 +1115,8 @@ public class Options {
 
     */
 /**
-     * @param javaArgs the javaArgs to set
-     *//*
+ * @param javaArgs the javaArgs to set
+ *//*
 
     public void setJavaArgs(String javaArgs) {
         this.javaArgs = javaArgs;
@@ -1124,8 +1124,8 @@ public class Options {
 
     */
 /**
-     * @return the selectedPack
-     *//*
+ * @return the selectedPack
+ *//*
 
     public int getSelectedPack() {
         return selectedPack;
@@ -1133,8 +1133,8 @@ public class Options {
 
     */
 /**
-     * @param selectedPack the selectedPack to set
-     *//*
+ * @param selectedPack the selectedPack to set
+ *//*
 
     public void setSelectedPack(int selectedPack) {
         this.selectedPack = selectedPack;
@@ -1142,8 +1142,8 @@ public class Options {
 
     */
 /**
-     * @param version the version to set
-     *//*
+ * @param version the version to set
+ *//*
 
     public void setVersion(int[] version) {
         this.version = version;
@@ -1159,8 +1159,8 @@ public class Options {
 
     */
 /**
-     * @return the disponiblePacks
-     *//*
+ * @return the disponiblePacks
+ *//*
 
     public File getDisponiblePacks() {
         return disponiblePacks;
@@ -1168,8 +1168,8 @@ public class Options {
 
     */
 /**
-     * @param disponiblePacks the disponiblePacks to set
-     *//*
+ * @param disponiblePacks the disponiblePacks to set
+ *//*
 
     public void setDisponiblePacks(File disponiblePacks) {
         this.disponiblePacks = disponiblePacks;
@@ -1177,8 +1177,8 @@ public class Options {
 
     */
 /**
-     * @return the packList
-     *//*
+ * @return the packList
+ *//*
 
     public List<Object> getPackList() {
         return packList;
@@ -1186,8 +1186,8 @@ public class Options {
 
     */
 /**
-     * @param packList the packList to set
-     *//*
+ * @param packList the packList to set
+ *//*
 
     public void setPackList(List<Object> packList) {
         this.packList = packList;
