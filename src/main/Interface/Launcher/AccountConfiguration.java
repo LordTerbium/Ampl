@@ -1,5 +1,6 @@
 package main.Interface.Launcher;
 
+import main.Interface.Launcher.actions.TextInputListener;
 import main.Interface.Log.LogWrapper;
 import main.Service.Authentication.Authentication;
 import main.Service.Settings.InfoLauncher;
@@ -43,11 +44,9 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
 
         logger.debug( "Properties set.<br> Adding panes." );
 
-
-        refreshListModel();
-
-        usrName = new JList<String>( listModel );
+        usrName = new JList<String>( refreshListModel() );
         usrName.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
+        usrName.addListSelectionListener( this );
         usrName.setLayoutOrientation( JList.VERTICAL );
         usrName.setVisibleRowCount( - 1 );
         JScrollPane scrollPane = new JScrollPane( usrName, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED );
@@ -59,6 +58,7 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
         ImageIcon icon = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-add.png" ) );
         btnAdd = new JButton( icon );
         btnAdd.addActionListener( this );
+        btnAdd.setEnabled( false );
 
         btnAdd.setActionCommand( "add" );
         ImageIcon icon1 = new ImageIcon( getClass().getResource( "/resources/tango-icon-theme-0.8.90/tango-icon-theme-0.8.90/32x32/actions/list-remove.png" ) );
@@ -80,6 +80,8 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
         JLabel usrNLbl = new JLabel( "User name:" );
         usrNTxt = new JTextField();
         usrNTxt.setColumns( 15 );
+        usrNTxt.addActionListener( new TextInputListener() );
+        usrNTxt.setActionCommand( "user" );
 
         usrNPanel.add( usrNLbl );
         usrNPanel.add( usrNTxt );
@@ -108,7 +110,7 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
     /**
      * The method refreshes the shown user list. If no data was found it will load it from the file. If the file is empty it will show anything.
      */
-    private void refreshListModel ()
+    private DefaultListModel <String> refreshListModel ()
     {
 
         List<User> userList = Accounts.instance().getUserList();
@@ -127,7 +129,6 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
             userList = Accounts.instance().getUserList();
             if ( ! userList.isEmpty() )
             {
-
                 logger.debug( "Refreshing user data." );
                 for ( User user : userList )
                 {
@@ -136,8 +137,11 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
             } else
             {
                 logger.debug( "No data ..." );
+                listModel.clear();
             }
         }
+
+        return listModel;
     }
 
     /**
@@ -156,7 +160,7 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
             if ( authentication.login( usrNTxt.getText(), pwTxt.getPassword() ) )
             {
 
-                refreshListModel();
+                usrName.setModel( refreshListModel() );
                 usrNTxt.setText( "" );
                 pwTxt.setText( "" );
                 btnAdd.setEnabled( false );
@@ -164,8 +168,10 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
         } else if ( e.getActionCommand().equals( "del" ) )
         {
             //TODO implement the logout of the selected list entry.
-            int index = usrName.getSelectedIndex();
-            usrName.remove( index );
+            Accounts.instance().removeUser( usrName.getSelectedValue() );
+            usrName.setModel( refreshListModel() );
+            usrName.validate();
+            btnDel.setEnabled( false );
         }
     }
 
@@ -173,13 +179,54 @@ public class AccountConfiguration extends JFrame implements ActionListener, List
     public void valueChanged ( ListSelectionEvent e )
     {
 
-        ListSelectionModel listSelectionModel = ( ListSelectionModel ) e.getSource();
-        if ( ! listSelectionModel.isSelectionEmpty() && ! e.getValueIsAdjusting() )
+        if ( e.getFirstIndex() != - 1 )
         {
             btnDel.setEnabled( true );
-        } else
-        {
-            btnDel.setEnabled( false );
         }
+    }
+
+    /**
+     * The method returns the JList component of the configuration panel.
+     * @return a JList object.
+     */
+    public JList<String> getUsrName ()
+    {
+        return usrName;
+    }
+
+    /**
+     * The method returns the delete JButton of the configuration panel.
+     * @return a JButton object.
+     */
+    public JButton getBtnDel ()
+    {
+        return btnDel;
+    }
+
+    /**
+     * The method returns the text-field component for the username.
+     * @return a JTextField object.
+     */
+    public JTextField getUsrNTxt ()
+    {
+        return usrNTxt;
+    }
+
+    /**
+     * The method returns the password field component.
+     * @return a JPasswordField object.
+     */
+    public JPasswordField getPwTxt ()
+    {
+        return pwTxt;
+    }
+
+    /**
+     * The method returns the add button of the configuration panel.
+     * @return a JButton object.
+     */
+    public JButton getBtnAdd ()
+    {
+        return btnAdd;
     }
 }

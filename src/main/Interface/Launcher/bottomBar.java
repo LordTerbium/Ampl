@@ -8,10 +8,8 @@ import java.awt.event.ActionListener;
 public class bottomBar extends JPanel implements ActionListener
 {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+    private static final long                 serialVersionUID     = 1L;
+    private              AccountConfiguration accountConfiguration = null;
 
     public bottomBar ()
     {
@@ -54,7 +52,15 @@ public class bottomBar extends JPanel implements ActionListener
     public void actionPerformed ( ActionEvent event )
     {
 
-        new AccountConfiguration();
+        accountConfiguration = new AccountConfiguration();
     }
 
+    /**
+     * The method returns the accountConfiguration JPanel. If the panel hasn't been opened, the method may return null.
+     * @return a accountConfiguration object.
+     */
+    public AccountConfiguration getAccountConfiguration ()
+    {
+        return accountConfiguration;
+    }
 }

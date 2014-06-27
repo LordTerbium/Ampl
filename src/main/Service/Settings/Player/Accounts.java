@@ -34,25 +34,6 @@ public class Accounts
         return userList;
     }
 
-    /**
-     * The method returns a user by matching the given in-game name with the stored data. If an account contains the wanted string, the method will return that user instance. Else it returns null.
-     *
-     * @param playerName is the wanted in-game name
-     * @return a User object that corresponds to the search string. Elsewhere it returns null.
-     */
-    public User getUserByName ( String playerName )
-    {
-
-        for ( User user : userList )
-        {
-            if ( user.getName().equals( playerName ) )
-            {
-                return user;
-            }
-        }
-        return null;
-    }
-
     public void load ()
     {
 
@@ -107,6 +88,36 @@ public class Accounts
         userList.add( user );
 
         return user;
+    }
+
+    /**
+     * The method removes the provided user from the user list.
+     * @param name
+     */
+    public void removeUser ( String name )
+    {
+
+        userList.remove( getUserByName( name ) );
+        save();
+    }
+
+    /**
+     * The method returns a user by matching the given in-game name with the stored data. If an account contains the wanted string, the method will return that user instance. Else it returns null.
+     *
+     * @param playerName is the wanted in-game name
+     * @return a User object that corresponds to the search string. Elsewhere it returns null.
+     */
+    public User getUserByName ( String playerName )
+    {
+
+        for ( User user : userList )
+        {
+            if ( user.getName().equals( playerName ) )
+            {
+                return user;
+            }
+        }
+        return null;
     }
 
     /**

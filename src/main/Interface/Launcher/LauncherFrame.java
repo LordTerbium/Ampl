@@ -20,6 +20,7 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
     private static final long          serialVersionUID = - 1443452893964454294L;
     private static       LauncherFrame _instance        = new LauncherFrame();
     private              LogWrapper    logger           = LogWrapper.getLogger( LauncherFrame.class );
+    private final bottomBar bottomBar;
 
     /**
      * The constructor creates a new frame with settings taken from the configuration.
@@ -42,8 +43,8 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
 
         logger.debug( "Properties set.<br> Adding panes." );
 
-        bottomBar control = new bottomBar();
-        add( control, BorderLayout.SOUTH );
+        bottomBar = new bottomBar();
+        add( bottomBar, BorderLayout.SOUTH );
 
         logger.debug( "Adding listener." );
         addComponentListener( this );
@@ -141,5 +142,14 @@ public class LauncherFrame extends JFrame implements ComponentListener, WindowLi
 
     @Override
     public void windowDeactivated ( WindowEvent e ) {}
+
+    /**
+     * The method returns the bottom JPanel containing some important bottomBar components.
+     * @return a bottomBar objects.
+     */
+    public bottomBar getBottomBar ()
+    {
+        return bottomBar;
+    }
 }
 
